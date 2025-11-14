@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PqdifSaver", "PqdifSaver\PqdifSaver.csproj", "{A9D51943-5B45-4EEB-87F6-0FC9F7F5D67D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pqdif", "pqdif", "{CC435114-B3DC-4F44-9E3E-C06005E2F1DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4E40523A-8AC2-4438-BC1C-F9A363575292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemstone.PQDIF", "pqdif\src\Gemstone.PQDIF\Gemstone.PQDIF.csproj", "{526D044E-B3D0-4892-8A12-3F76D4232B02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9D51943-5B45-4EEB-87F6-0FC9F7F5D67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D51943-5B45-4EEB-87F6-0FC9F7F5D67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D51943-5B45-4EEB-87F6-0FC9F7F5D67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D51943-5B45-4EEB-87F6-0FC9F7F5D67D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526D044E-B3D0-4892-8A12-3F76D4232B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526D044E-B3D0-4892-8A12-3F76D4232B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526D044E-B3D0-4892-8A12-3F76D4232B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526D044E-B3D0-4892-8A12-3F76D4232B02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4E40523A-8AC2-4438-BC1C-F9A363575292} = {CC435114-B3DC-4F44-9E3E-C06005E2F1DC}
+		{526D044E-B3D0-4892-8A12-3F76D4232B02} = {4E40523A-8AC2-4438-BC1C-F9A363575292}
+	EndGlobalSection
+EndGlobal

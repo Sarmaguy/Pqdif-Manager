@@ -1,0 +1,37 @@
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.app
+*.log
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.vsp
+*.vspscc
+*.vssscc
+
+# Visual Studio Code settings
+.vscode/
+
+# Rider IDE
+.idea/
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Publish outputs
+*.publish.xml
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Environment files
+.env

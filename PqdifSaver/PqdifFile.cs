@@ -92,6 +92,19 @@ namespace PQDIF_Manager
                         channel.Phase.ToString(),
                         valueSeries.SeriesValueType);
 
+                    if (seriesId == 0)
+                    {
+                        SeriesInfo seriesInfo = new SeriesInfo
+                        {
+                            ChannelName = channel.ChannelName,
+                            QuantityMeasured = channel.QuantityMeasured.ToString(),
+                            Phase = channel.Phase.ToString(),
+                            SeriesValueType = valueSeries.SeriesValueType
+                        };
+
+                        await seriesInfoSaver.SaveSeriesInfoAsync(seriesInfo);
+                        seriesId = seriesInfo.SeriesId;
+                    }
 
                     for (int j = 0; j < timeSeries.SampleCount; j++)
                     {

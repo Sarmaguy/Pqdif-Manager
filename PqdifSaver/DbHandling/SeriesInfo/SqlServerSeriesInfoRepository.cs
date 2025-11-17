@@ -26,7 +26,7 @@ public class SqlServerSeriesInfoRepository : ISeriesInfoRepository
                 return Task.FromResult(Convert.ToInt32(result));
             }
 
-            throw new Exception("SeriesInfo not found.");
+            return Task.FromResult(0);
         }
     }
 

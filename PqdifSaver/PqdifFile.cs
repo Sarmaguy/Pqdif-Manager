@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Gemstone.PQDIF.Logical;
 
 namespace PQDIF_Manager
@@ -17,6 +18,7 @@ namespace PQDIF_Manager
         public Channel[] Channels { get; private set; }
         public ObservationRecord ObservationRecord { get; private set; }
         public string RecordingId {get; private set;}
+        public DateTime StartTimestampUtc => StartTime.ToUniversalTime();
 
         private PqdifFile(string filePath, DateTime createTime, DateTime startTime, DateTime effectiveTime,
         string name, string deviceName, string dataSourceLocation, Channel[] channels, ObservationRecord observationRecord)
@@ -67,7 +69,45 @@ namespace PQDIF_Manager
             );
         }
 
+
+
+        internal async Task<IEnumerable<Measurement>> ParseMeasurementsFromFile()
+        {
+            List<Measurement> measurements = new();
+
+            ISeriesInfoRepository seriesInfoSaver = new SqlServerSeriesInfoRepository(
+                "Server=localhost\\SQLEXPRESS;Database=Pqdif;Trusted_Connection=True;TrustServerCertificate=True;");
+
+
+            foreach (Channel channel in Channels)
+            {
+                Series timeSeries = channel.TimeSeries;
+                for (int i = 0; i < channel.ValueSeries.Length; i++)
+                {
+                    Series valueSeries = channel.ValueSeries[i];
+
+                    int seriesId = await seriesInfoSaver.GetSeriesIdAsync(
+                        channel.ChannelName,
+                        channel.QuantityMeasured.ToString(),
+                        channel.Phase.ToString(),
+                        valueSeries.SeriesValueType);
+
+
+                    for (int j = 0; j < timeSeries.SampleCount; j++)
+                    {
+                        DateTime timestampInUTC = StartTimestampUtc.AddSeconds((double)timeSeries.OriginalValues[j]);
+                        double value = Convert.ToDouble(valueSeries.OriginalValues[j]);
+                        measurements.Add(new Measurement
+                        {
+                            RecordingId = RecordingId,
+                            timestamp = timestampInUTC,
+                            Value = value,
+                            SeriesId = seriesId
+                        });
+                    }
+                }
+            }
+            return measurements;
+        }
     }
-
-
 }

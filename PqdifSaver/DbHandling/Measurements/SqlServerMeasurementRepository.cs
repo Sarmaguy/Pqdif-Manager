@@ -23,11 +23,11 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         table.Columns.Add("RecordingId", typeof(string));
         table.Columns.Add("timestamp", typeof(DateTime));
         table.Columns.Add("Value", typeof(double));
-        table.Columns.Add("ChannelId", typeof(int));
+        table.Columns.Add("SeriesId", typeof(int));
 
         foreach (var measurement in measurements)
         {
-            table.Rows.Add(measurement.RecordingId, measurement.timestamp, measurement.Value, measurement.ChannelId);
+            table.Rows.Add(measurement.RecordingId, measurement.timestamp, measurement.Value, measurement.SeriesId);
         }
 
         await bulkCopy.WriteToServerAsync(table);

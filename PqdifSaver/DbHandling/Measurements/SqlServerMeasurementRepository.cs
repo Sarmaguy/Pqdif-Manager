@@ -1,5 +1,6 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
+using PQDIF_Manager;
 public class SqlServerMeasurementRepository : IMeasurementRepository
 {
     private readonly string _connectionString;
@@ -31,5 +32,52 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         }
 
         await bulkCopy.WriteToServerAsync(table);
+    }
+
+    public async Task BulkInsertBigAsync(PqdifFile pqdifFile)
+    {
+        Channel[] channels = pqdifFile.Channels;
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "MeasurementsBig"
+        };
+
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(string));
+        table.Columns.Add("timestamp", typeof(DateTime));
+        foreach (var channel in channels)
+        {
+            foreach (var series in channel.ValueSeries)
+            {
+                        string ColumnName = channel.ChannelName.Replace(" ", "_") + "_" + series.SeriesValueType;
+                        table.Columns.Add(ColumnName, typeof(double));
+            }
+        }
+
+        int totalMeasurements = channels[0].ValueSeries[0].SampleCount;
+        for (int i = 0; i < totalMeasurements; i++)
+        {
+            DateTime timeStamp = pqdifFile.StartTime;
+            DataRow row = table.NewRow();
+            row["RecordingId"] = pqdifFile.RecordingId;
+            row["timestamp"] = timeStamp.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]); //treba pretvorit u UTC
+
+            foreach (var channel in channels)
+            {
+                foreach (var series in channel.ValueSeries)
+                {
+                    string ColumnName = channel.ChannelName.Replace(" ", "_") + "_" + series.SeriesValueType;
+                    row[ColumnName] = series.OriginalValues[i];
+                }
+            }
+
+            table.Rows.Add(row);
+        }
+
+        await bulkCopy.WriteToServerAsync(table);
+        
     }
 }

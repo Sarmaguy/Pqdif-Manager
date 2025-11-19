@@ -4,7 +4,7 @@ using Microsoft.VisualBasic;
 using PQDIF_Manager;
 
 string rootFolder = @"C:\Users\Jura\Desktop\P3003845"; //lokacija foldera
-        IMeasurementRepository measurementRepository =
+        SqlServerMeasurementRepository measurementRepository =
             new SqlServerMeasurementRepository(
                 "Server=localhost\\SQLEXPRESS;Database=Pqdif;Trusted_Connection=True;TrustServerCertificate=True;");
 
@@ -14,20 +14,20 @@ await ProcessDirectoryAsync(rootFolder, measurementRepository);
 
 Console.WriteLine("Finished uploading all measurements.");
 
-static async Task ProcessDirectoryAsync(string directoryPath, IMeasurementRepository measurementRepository) //Funkcija za fileVisitor, da automatiziram upis svih fileova
+static async Task ProcessDirectoryAsync(string directoryPath, SqlServerMeasurementRepository measurementRepository) //Funkcija za fileVisitor, da automatiziram upis svih fileova
     {
         
         foreach (var filePath in Directory.GetFiles(directoryPath))
         {
-            if ((filePath.Contains("10Sec_Frequency_ClassA") || filePath.Contains("Power_Energy-TP") || filePath.Contains("Trends-Stats_PQDIF") || filePath.Contains("10Min_ClassA_PQDIF")) && Path.GetExtension(filePath).Equals(".pqd", StringComparison.OrdinalIgnoreCase))
+            if (filePath.Contains("10Min_ClassA_PQDIF") && Path.GetExtension(filePath).Equals(".pqd", StringComparison.OrdinalIgnoreCase)) //filePath.Contains("10Sec_Frequency_ClassA") || filePath.Contains("Power_Energy-TP") || filePath.Contains("Trends-Stats_PQDIF") || 
             {
                 Console.WriteLine($"Processing file: {filePath}");
 
                 try
                 {
                     PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(filePath);
-                    var measurements = await pqdifFile.ParseMeasurementsFromFile();
-                    await measurementRepository.BulkInsertAsync(measurements);
+                    await measurementRepository.BulkInsertBigAsync(pqdifFile);
+
 
                     Console.WriteLine($"Finished uploading: {filePath}");
                 }

@@ -63,13 +63,19 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
             DateTime timeStamp = pqdifFile.StartTime;
             DataRow row = table.NewRow();
             row["RecordingId"] = pqdifFile.RecordingId;
-            row["timestamp"] = timeStamp.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]); //treba pretvorit u UTC
+            row["timestamp"] = timeStamp.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]).ToUniversalTime();
 
             foreach (var channel in channels)
             {
                 foreach (var series in channel.ValueSeries)
                 {
                     string ColumnName = channel.ChannelName.Replace(" ", "_") + "_" + series.SeriesValueType;
+
+                    if(series.OriginalValues.Count <= i)
+                    {
+                        row[ColumnName] = DBNull.Value;
+                        continue;
+                    }
                     row[ColumnName] = series.OriginalValues[i];
                 }
             }

@@ -11,7 +11,8 @@ public class ConfigBuilder : ConfigurationBuilder
 
     private ConfigBuilder() : base()
     {
-        this.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        var path = Path.Combine(AppContext.BaseDirectory, "appsettings.json");
+        this.AddJsonFile(path, optional: false, reloadOnChange: true);
         var config = this.Build();
         ConnectionString = config.GetConnectionString("DefaultConnection");
     }

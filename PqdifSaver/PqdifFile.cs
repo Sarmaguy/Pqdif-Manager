@@ -75,9 +75,7 @@ namespace PQDIF_Manager
         {
             List<Measurement> measurements = new();
 
-            ISeriesInfoRepository seriesInfoSaver = new SqlServerSeriesInfoRepository(
-                "Server=localhost\\SQLEXPRESS;Database=Pqdif;Trusted_Connection=True;TrustServerCertificate=True;");
-
+            ISeriesInfoRepository seriesInfoSaver = new SqlServerSeriesInfoRepository();
 
             foreach (Channel channel in Channels)
             {

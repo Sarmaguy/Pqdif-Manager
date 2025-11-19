@@ -1,9 +1,9 @@
-#Device Data Acquisition Service
+# Device Data Acquisition Service
 
-##Windows Service for Parallel Measurement Device Communication, Data Acquisition, and Analysis
+## Windows Service for Parallel Measurement Device Communication, Data Acquisition, and Analysis
 Powered by Gemstone.PQDIF
 
-##📌 Overview
+## 📌 Overview
 
 This project is a C# Windows Service designed to communicate with a large number of measurement devices in parallel, retrieve their data, store it in a SQL database, and run analytics on top of the collected data. The system supports FTP and custom TCP protocols, handles high-volume measurement data, performs 7-day sliding-window analytics, and exposes a WCF interface for remote management and monitoring.
 

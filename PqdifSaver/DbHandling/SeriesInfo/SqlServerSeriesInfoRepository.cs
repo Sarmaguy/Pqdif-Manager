@@ -1,12 +1,13 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 public class SqlServerSeriesInfoRepository : ISeriesInfoRepository
 {
     private readonly string _connectionString;
 
-    public SqlServerSeriesInfoRepository(string connectionString)
+    public SqlServerSeriesInfoRepository()
     {
-        _connectionString = connectionString;
+        _connectionString = ConfigBuilder.Instance.ConnectionString;
     }
 
     public Task<int> GetSeriesIdAsync(string channelName, string quantityMeasured, string phase, string seriesValueType)

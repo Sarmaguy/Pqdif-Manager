@@ -5,9 +5,9 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
 {
     private readonly string _connectionString;
 
-    public SqlServerMeasurementRepository(string connectionString)
+    public SqlServerMeasurementRepository()
     {
-        _connectionString = connectionString;
+        _connectionString = ConfigBuilder.Instance.ConnectionString;
     }
 
     public async Task BulkInsertAsync(IEnumerable<Measurement> measurements)

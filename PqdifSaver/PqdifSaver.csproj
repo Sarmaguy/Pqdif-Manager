@@ -17,6 +17,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Resources\MeasurementTypes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>

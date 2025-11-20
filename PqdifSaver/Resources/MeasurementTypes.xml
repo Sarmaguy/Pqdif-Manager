@@ -1,0 +1,1431 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Visu>
+  <class sign="10-MIN">
+    <groups name="Fazni naponi" sign="ULE_10M" table="">
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>U1</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>U2</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>U3</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>UN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona UN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Linijski naponi" sign="ULL_10M" table="">
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>U12</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>U23</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>U31</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Ekstremi faznih napona" sign="ULE_EXT_10M" table="">
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>U1_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U1</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>U1_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U1</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>U2_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U2</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>U2_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U2</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>U3_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U3</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>U3_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U3</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>UN_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona UN</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>UN_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona UN</description>
+      </group>
+    </groups>
+	<groups name="Ekstremi linijskih napona" sign="ULL_EXT_10M" table="">
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>U12_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U12</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>U12_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U12</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>U23_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U23</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>U23_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U23</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>U31_MIN</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost napona U31</description>
+      </group>
+      <group id="U">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>U31_MAX</columnName>
+        <unit>Volts</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost napona U31</description>
+      </group>
+    </groups>
+    <groups name="Struja" sign="ILE_10M" table="">
+      <group id="I">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>I1</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost struje I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>I2</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost struje I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>I3</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost struje I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>IN</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Efektivna vrijednost struje IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Ekstremi struje" sign="ILE_EXT_10M" table="">
+      <group id="I">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>I1_MIN</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost struje I1</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>I1_MAX</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost struje I1</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>I2_MIN</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost struje I2</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>I2_MAX</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost struje I2</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>I3_MIN</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost struje I3</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>I3_MAX</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost struje I3</description>
+      </group>
+	  <group id="I">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>IN_MIN</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Minimalna vrijednost struje IN</description>
+      </group>
+      <group id="I">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>IN_MAX</columnName>
+        <unit>Amps</unit><tagQuantityId>RMS value</tagQuantityId>
+        <description>Maksimalna vrijednost struje IN</description>
+      </group>
+    </groups>  
+    <groups name="Nesimetrija napona" sign="UU_10M" table="">
+	  <group id="UU">
+        <id />
+        <valueType>Average</valueType>
+        <phase>Total</phase>
+        <siPrefix />
+        <columnName>UU</columnName>
+        <unit>Percent</unit><tagQuantityId>Voltage Negative sequence component unbalance (%)</tagQuantityId>
+        <description>Voltage Negative Sequence Unbalance</description>
+        <dataType>float</dataType>
+      </group>
+	  <group id="UU">
+        <id />
+        <valueType>Average</valueType>
+        <phase>Total</phase>
+        <siPrefix />
+        <columnName>UU0</columnName>
+        <unit>Percent</unit><tagQuantityId>Voltage Zero sequence component unbalance (%)</tagQuantityId>
+        <description>Voltage Zero Sequence Unbalance</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Nesimetrija struja" sign="IU_10M" table="">
+	  <group id="IU">
+        <id />
+        <valueType>Average</valueType>
+        <phase>Total</phase>
+        <siPrefix />
+        <columnName>IU</columnName>
+        <unit>Percent</unit><tagQuantityId>Current Negative sequence component unbalance (%)</tagQuantityId>
+        <description>Current Negative Sequence Unbalance</description>
+        <dataType>float</dataType>
+      </group>
+	  <group id="IU">
+        <id />
+        <valueType>Average</valueType>
+        <phase>Total</phase>
+        <siPrefix />
+        <columnName>IU0</columnName>
+        <unit>Percent</unit><tagQuantityId>Current Zero sequence component unbalance (%)</tagQuantityId>
+        <description>Current Zero Sequence Unbalance</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="THD faznih napona" sign="THD_ULE_10M" table="">
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>THD_U1</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>THD_U2</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>THD_U3</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>THD_UN</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona UN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="THD linijskih napona" sign="THD_ULL_10M" table="">
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>THD_U12</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>THD_U23</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>THD_U31</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="THD struje" sign="THD_ILE_10M" table="">
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>THD_I1</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje struje I1</description>
+        <dataType>float</dataType>
+      </group>
+	   <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>THD_I2</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje struje I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>THD_I3</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje struje I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="THD">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>THD_IN</columnName>
+        <unit>Percent</unit><tagQuantityId>Total harmonic distortion (%)</tagQuantityId>
+        <description>Ukupno harmoničko izobličenje struje IN</description>
+        <dataType>float</dataType>
+      </group> 
+    </groups>	
+	<groups name="Kratkotrajno treperenje napona" sign="PST_10M" table="">
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>PST1</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>PST2</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>PST3</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>PST12</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>PST23</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PST">
+        <id />
+        <valueType />
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>PST31</columnName>
+        <unit>Volts</unit><tagQuantityId>Short Term Flicker</tagQuantityId>
+        <description>Kratkotrajno treperenje napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Dugotrajno treperenje napona" sign="PLT_2H" table="">
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>PLT1</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>PLT2</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>PLT3</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>PLT12</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>PLT23</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PLT">
+        <id />
+        <valueType />
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>PLT31</columnName>
+        <unit>Volts</unit><tagQuantityId>Long Term Flicker</tagQuantityId>
+        <description>Dugotrajno treperenje napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Fazni kutovi napona" sign="PHU_10M" table="">
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>PHI_U1</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U1 - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>PHI_U2</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U2 - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>PHI_U3</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U3 - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PHI_UN</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona UN - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>PHI_U12</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U12 - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>PHI_U23</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U23 - referentno (osnova)</description>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>PHI_U31</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut napona U31 - referentno (osnova)</description>
+      </group>
+    </groups>
+    <groups name="Fazni kutovi struje" sign="PHI_10M" table="">
+	    <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>PHI_I1</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut struje I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>PHI_I2</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut struje I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>PHI_I3</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut struje I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="PH">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PHI_IN</columnName>
+        <unit>°</unit><tagQuantityId />
+        <description>Fazni kut struje IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Faktor snage" sign="PF_10M" table="">
+      <group id="PF">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>PF1</columnName>
+        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <description>Faktor snage od U1 i I1</description>
+      </group>
+      <group id="PF">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>PF2</columnName>
+        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <description>Faktor snage od U2 i I2</description>
+      </group>
+      <group id="PF">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>PF3</columnName>
+        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <description>Faktor snage od U3 i I3</description>
+      </group>
+      <group id="PF">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PFN</columnName>
+        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <description>Faktor snage od UN i IN</description>
+      </group>
+      <group id="PF">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>PF</columnName>
+        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <description>Faktor snage</description>
+      </group>
+    </groups>
+    <groups name="Radna snaga" sign="P_10M" table="">
+      <group id="P">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>P1</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Radna snaga od U1 i I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>P2</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Radna snaga od U2 i I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>P3</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Radna snaga od U3 i I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Radna snaga od UN i IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Prividna snaga" sign="S_10M" table="">
+      <group id="S">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>S1</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Prividna snaga od U1 i I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>S2</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Prividna snaga od U2 i I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>S3</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Prividna snaga od U3 i I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>SN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Prividna snaga od UN i IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Jalova snaga" sign="Q_10M" table=""> 
+      <group id="Q">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>Q1</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Jalova snaga od U1 i I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>Q2</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Jalova snaga od U2 i I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>Q3</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Jalova snaga od U3 i I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>QN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Jalova snaga od UN i IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Ukupna snage" sign="PQS_10M" table="">
+	  <group id="P">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>P</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Radna snaga</description>
+        <dataType>float</dataType>
+      </group>		  
+	  <group id="S">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>S</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Prividna snaga</description>
+        <dataType>float</dataType>
+      </group>
+	  <group id="Q">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Jalova snaga</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Ekstremi radne snage" sign="P_EXT_10M" table="">
+      <group id="P">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>P1_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Minimalna vrijednost snage P1</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>P1_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Maksimalna vrijednost snage P1</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>P2_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Minimalna vrijednost snage P2</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>P2_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Maksimalna vrijednost snage P2</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>P3_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Minimalna vrijednost snage P3</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>P3_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Maksimalna vrijednost snage P3</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PN_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Minimalna vrijednost snage PN</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>PN_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Maksimalna vrijednost snage PN</description>
+      </group>
+    </groups>
+	<groups name="Ekstremi prividne snage" sign="S_EXT_10M" table="">
+      <group id="S">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>S1_MIN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Minimalna vrijednost snage S1</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>S1_MAX</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Maksimalna vrijednost snage S1</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>S2_MIN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Minimalna vrijednost snage S2</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>S2_MAX</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Maksimalna vrijednost snage S2</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>S3_MIN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Minimalna vrijednost snage S3</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>S3_MAX</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Maksimalna vrijednost snage S3</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>SN_MIN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Minimalna vrijednost snage SN</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>SN_MAX</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Maksimalna vrijednost snage SN</description>
+      </group>
+    </groups>
+	<groups name="Ekstremi jalove snage" sign="Q_EXT_10M" table="">
+      <group id="Q">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q1_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Minimalna vrijednost snage Q1</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q1_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Maksimalna vrijednost snage Q1</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q2_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Minimalna vrijednost snage Q2</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q2_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Maksimalna vrijednost snage Q2</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q3_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Minimalna vrijednost snage Q3</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q3_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Maksimalna vrijednost snage Q3</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>QN_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Minimalna vrijednost snage QN</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>QN_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Maksimalna vrijednost snage QN</description>
+      </group>
+    </groups>
+	<groups name="Ekstremi ukupne snage" sign="PQS_EXT_10M" table="">
+      <group id="P">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>P_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Minimalna vrijednost snage P</description>
+      </group>
+      <group id="P">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>P_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <description>Maksimalna vrijednost snage P</description>
+      </group>
+	  <group id="S">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>S_MIN</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Minimalna vrijednost snage S</description>
+      </group>
+      <group id="S">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>S_MAX</columnName>
+        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <description>Maksimalna vrijednost snage S</description>
+      </group>
+	  <group id="Q">
+        <id />
+        <valueType>Minimum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q_MIN</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Minimalna vrijednost snage Q</description>
+      </group>
+      <group id="Q">
+        <id />
+        <valueType>Maximum</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>Q_MAX</columnName>
+        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <description>Maksimalna vrijednost snage Q</description>
+      </group>
+	</groups>
+    <groups name="Harmonici faznog napona" sign="U_HULE_10M" table="HULE">
+      <group id="HRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>U1Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>U2Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>U3Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>UNHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona UN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Harmonici linijskih napona" sign="U_HULL_10M" table="HULL">
+      <group id="HRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>U12Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>U23Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>U31Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Međuharmonici faznih napona" sign="U_IHULE_10M" table="IHULE">
+      <group id="IHRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>U1IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName count="50">U2IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName count="50">U3IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMULE">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName count="50">UNIHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona UN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+	<groups name="Međuharmonici linijskih napona" sign="U_IHULL_10M" table="IHULL">
+      <group id="IHRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AB</phase>
+        <siPrefix />
+        <columnName>U12IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U12</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BC</phase>
+        <siPrefix />
+        <columnName>U23IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U23</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMULL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CA</phase>
+        <siPrefix />
+        <columnName>U31IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik napona U31</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Harmonici struje" sign="I_HILE_10M" table="HILE">
+      <group id="HRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>I1Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik struje I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>I2Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik struje I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase />
+        <siPrefix />
+        <columnName>I3Hx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik struje I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="HRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>INHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Harmonik struje IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+    <groups name="Međuharmonici struje" sign="I_IHILE_10M" table="IHILE">
+      <group id="IHRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>AN</phase>
+        <siPrefix />
+        <columnName>I1IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik struje I1</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>BN</phase>
+        <siPrefix />
+        <columnName>I2IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik struje I2</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>CN</phase>
+        <siPrefix />
+        <columnName>I3IHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik struje I3</description>
+        <dataType>float</dataType>
+      </group>
+      <group id="IHRMIL">
+        <id />
+        <valueType>Average</valueType>
+        <phase>NG</phase>
+        <siPrefix />
+        <columnName>INIHx</columnName>
+        <unit>Percent</unit><tagQuantityId />
+        <description>Međuharmonik struje IN</description>
+        <dataType>float</dataType>
+      </group>
+    </groups>
+  </class>
+</Visu>

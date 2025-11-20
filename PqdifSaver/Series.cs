@@ -10,7 +10,7 @@ namespace PQDIF_Manager
         public int SampleCount { get; private set; }
         public IList<object> OriginalValues { get; private set; }
         public Guid QuantityCharacteristicID { get; private set; }
-        public string? QuantityCharacteristic { get; private set; }
+        public string? QuantityCharacteristic { get;  set; }
         public QuantityUnits QuantityUnits { get; private set; }
 
         public Series(Gemstone.PQDIF.Logical.SeriesInstance seriesInstance)

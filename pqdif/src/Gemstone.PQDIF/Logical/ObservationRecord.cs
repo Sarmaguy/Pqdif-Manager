@@ -249,7 +249,7 @@ namespace Gemstone.PQDIF.Logical
 
                 if (DisturbanceIDElement is null)
                     return DisturbanceCategory.None;
-
+                
                 return DisturbanceIDElement.GetGuid();
             }
             set
@@ -363,6 +363,65 @@ namespace Gemstone.PQDIF.Logical
             }
         }
 
+        /// <summary>
+        /// Gets or sets the duration of the observation event (in seconds).
+        /// PQDIF stores this as a floating point value.
+        /// </summary>
+        public double? Duration
+        {
+            get
+            {
+                ScalarElement? durationElement = PhysicalRecord.Body.Collection
+                    .GetScalarByTag(CharactDurationTag);
+
+                if (durationElement is null)
+                    return null;
+
+                return durationElement.GetReal8(); 
+            }
+            set
+            {
+                if (value is null)
+                    return;
+
+                CollectionElement collectionElement = PhysicalRecord.Body.Collection;
+                ScalarElement durationElement = collectionElement.GetOrAddScalar(CharactDurationTag);
+                durationElement.TypeOfValue = PhysicalType.Real8;
+                durationElement.SetReal8(value.Value);
+            }
+        }
+
+         /// <summary>
+        /// Gets or sets the Magnitude of the observation event (in %).
+        /// PQDIF stores this as a floating point value.
+        /// </summary>
+        public double? Magnitude
+        {
+            get
+            {
+                ScalarElement? magnitudeElement = PhysicalRecord.Body.Collection
+                    .GetScalarByTag(CharactMagnitude);
+
+                if (magnitudeElement is null)
+                    return null;
+
+                return magnitudeElement.GetReal8(); 
+            }
+            set
+            {
+                if (value is null)
+                    return;
+
+                CollectionElement collectionElement = PhysicalRecord.Body.Collection;
+                ScalarElement magnitudeElement = collectionElement.GetOrAddScalar(CharactMagnitude);
+                magnitudeElement.TypeOfValue = PhysicalType.Real8;
+                magnitudeElement.SetReal8(value.Value);
+            }
+        }
+
+
+
+
         #endregion
 
         #region [ Static ]
@@ -413,6 +472,16 @@ namespace Gemstone.PQDIF.Logical
         /// Tag that identifies the Disturbance Category.
         /// </summary>
         public static Guid DisturbanceCategoryTag { get; } = new("b48d8597-f5f5-11cf-9d89-0080c72e70a3");
+
+        /// <summary>
+        /// Tag that identifies the duration characteristic of an observation.
+        /// </summary>
+        public static Guid CharactDurationTag { get; } = new("2747d444-2bd0-11d2-ae42-0060083a2628");
+        /// <summary>
+        /// Tag that identifies the magnitude characteristic of an observation.
+        /// </summary>
+        public static Guid CharactMagnitude { get; } = new("2747d443-2bd0-11d2-ae42-0060083a2628");
+        
 
 
         // Static Methods

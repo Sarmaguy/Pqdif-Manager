@@ -3,9 +3,12 @@ using Gemstone.PQDIF.Logical;
 using Microsoft.Data.SqlClient;
 using PQDIF_Manager;
 using System.Text.RegularExpressions;
+using System.Numerics;
 public class SqlServerMeasurementRepository : IMeasurementRepository
 {
     private readonly string _connectionString;
+    public static int size = 0;
+    public static BigInteger n = 0;
 
     public SqlServerMeasurementRepository()
     {
@@ -18,7 +21,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await connection.OpenAsync();
         using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
         {
-            DestinationTableName = "VoltageHarmonics"
+            DestinationTableName = "VoltageHarmonicsNew"
         };
 
         foreach (DataColumn col in table.Columns)  bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
@@ -30,7 +33,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await connection.OpenAsync();
         using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
         {
-            DestinationTableName = "CurrentHarmonics"
+            DestinationTableName = "CurrentHarmonicsNew"
         };
         foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
         await bulkCopy.WriteToServerAsync(table); 
@@ -41,7 +44,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await connection.OpenAsync();
         using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
         {
-            DestinationTableName = "VoltageInterharmonics"
+            DestinationTableName = "VoltageInterharmonicsNew"
         };
         foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
         await bulkCopy.WriteToServerAsync(table);
@@ -52,7 +55,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await connection.OpenAsync();
         using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
         {
-            DestinationTableName = "CurrentInterharmonics"
+            DestinationTableName = "CurrentInterharmonicsNew"
         };
         foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
         await bulkCopy.WriteToServerAsync(table);
@@ -133,59 +136,85 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         for (int i = 0; i < totalMeasurements; i++)
         {
             DateTime timeStamp = sartTime.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]).ToUniversalTime();
-            DataRow voltageHarmonicsRow = VoltageHarmonicsTable.NewRow();
-            DataRow voltageInterharmonicsRow = VoltageInterharmonicsTable.NewRow();
-            DataRow currentHarmonicsRow = CurrentHarmonicsTable.NewRow();
-            DataRow currentInterharmonicsRow = CurrentInterharmonicsTable.NewRow();
+            double UH1 = 0;
+            double IH1= 0;
 
-            voltageHarmonicsRow["RecordingId"] = pqdifFile.RecordingId;
-            voltageHarmonicsRow["TimeStamp"] = timeStamp;
-            voltageInterharmonicsRow["RecordingId"] = pqdifFile.RecordingId;
-            voltageInterharmonicsRow["TimeStamp"] = timeStamp;
-            currentHarmonicsRow["RecordingId"] = pqdifFile.RecordingId;
-            currentHarmonicsRow["TimeStamp"] = timeStamp;
-            currentInterharmonicsRow["RecordingId"] = pqdifFile.RecordingId;
-            currentInterharmonicsRow["TimeStamp"] = timeStamp;
 
-            foreach (var channel in channels)
+            for (int j = 0; j < 120; j++)
             {
-                string ChannelName = channel.ChannelName;
-
-                if (!ChannelName.Contains("Interharmonic") && !ChannelName.Contains("Harmonic")) continue;
-
-                Series series = channel.ValueSeries[0];
-                QuantityMeasured quantityMeasured = channel.QuantityMeasured;
-                string convertedPhase = PhaseConverter.ConvertPhase(channel.Phase.ToString(), quantityMeasured.ToString());
-                int index;
-                var match = Regex.Match(ChannelName, @"H(\d+)");
- 
-                if (match.Success) index = int.Parse(match.Groups[1].Value);
-                else continue;
                 
+                DataRow voltageHarmonicsRow = VoltageHarmonicsTable.NewRow();
+                DataRow voltageInterharmonicsRow = VoltageInterharmonicsTable.NewRow();
+                DataRow currentHarmonicsRow = CurrentHarmonicsTable.NewRow();
+                DataRow currentInterharmonicsRow = CurrentInterharmonicsTable.NewRow();
 
-                if (ChannelName.Contains("Interharmonic"))
+                voltageHarmonicsRow["RecordingId"] = j;
+                voltageHarmonicsRow["TimeStamp"] = timeStamp;
+                voltageInterharmonicsRow["RecordingId"] = j;
+                voltageInterharmonicsRow["TimeStamp"] = timeStamp;
+                currentHarmonicsRow["RecordingId"] = j;
+                currentHarmonicsRow["TimeStamp"] = timeStamp;
+                currentInterharmonicsRow["RecordingId"] = j;
+                currentInterharmonicsRow["TimeStamp"] = timeStamp;
+
+                foreach (var channel in channels)
                 {
-                    if (quantityMeasured == QuantityMeasured.Voltage)
-                        voltageInterharmonicsRow[$"{convertedPhase}IH{index}"] = series.OriginalValues[i];
+                    string ChannelName = channel.ChannelName;
 
-                    else if (quantityMeasured == QuantityMeasured.Current)
-                        currentInterharmonicsRow[$"{convertedPhase}IH{index}"] = series.OriginalValues[i];
-                }
-                else if (ChannelName.Contains("Harmonic"))
-                {
-                    if (quantityMeasured == QuantityMeasured.Voltage)
-                        voltageHarmonicsRow[$"{convertedPhase}H{index-1}"] = series.OriginalValues[i];
+                    if (!ChannelName.Contains("Interharmonic") && !ChannelName.Contains("Harmonic")) continue;
 
-                    else if (quantityMeasured == QuantityMeasured.Current)
-                        currentHarmonicsRow[$"{convertedPhase}H{index-1}"] = series.OriginalValues[i];
+
+                    Series series = channel.ValueSeries[0];
+                    QuantityMeasured quantityMeasured = channel.QuantityMeasured;
+                    string convertedPhase = PhaseConverter.ConvertPhase(channel.Phase.ToString(), quantityMeasured.ToString());
+                    int index;
+                    var match = Regex.Match(ChannelName, @"H(\d+)");
+    
+                    if (match.Success) index = int.Parse(match.Groups[1].Value);
+                    else continue;
+
+                    var Random = new Random();
+                    int sign = Random.Next(0, 2) == 0 ? 1 : -1;
+                    double ValueAdjustmentFactor = 1 + sign * Random.NextDouble() / 1000;
+                    double value = (double)series.OriginalValues[i] * ValueAdjustmentFactor;
+
+
+
                     
-                }
-            }
 
-            VoltageHarmonicsTable.Rows.Add(voltageHarmonicsRow);
-            VoltageInterharmonicsTable.Rows.Add(voltageInterharmonicsRow);
-            CurrentHarmonicsTable.Rows.Add(currentHarmonicsRow);
-            CurrentInterharmonicsTable.Rows.Add(currentInterharmonicsRow);
+                    if (ChannelName.Contains("Interharmonic"))
+                    {
+                        if(quantityMeasured == QuantityMeasured.Voltage && index == 0) voltageInterharmonicsRow[$"{convertedPhase}IH{index}"] = value;
+
+                        else if (quantityMeasured == QuantityMeasured.Current && index == 0) currentInterharmonicsRow[$"{convertedPhase}IH{index}"] = value;
+
+                        else if (quantityMeasured == QuantityMeasured.Voltage)
+                            voltageInterharmonicsRow[$"{convertedPhase}IH{index}"] = Math.Round(value/(double)voltageInterharmonicsRow[$"{convertedPhase}IH{0}"]*100);
+
+                        else if (quantityMeasured == QuantityMeasured.Current)
+                            currentInterharmonicsRow[$"{convertedPhase}IH{index}"] = Math.Round(value/(double)currentInterharmonicsRow[$"{convertedPhase}IH{0}"]*100);
+                    }
+                    else if (ChannelName.Contains("Harmonic"))
+                    {
+                        if (quantityMeasured == QuantityMeasured.Voltage && index == 1) voltageHarmonicsRow[$"{convertedPhase}H{0}"] = value;
+
+                        else if (quantityMeasured == QuantityMeasured.Current && index == 1) currentHarmonicsRow[$"{convertedPhase}H{0}"] = value;
+
+
+                        else if (quantityMeasured == QuantityMeasured.Voltage)
+                            voltageHarmonicsRow[$"{convertedPhase}H{index-1}"] = Math.Round(value/(double)voltageHarmonicsRow[$"{convertedPhase}H{0}"]*100);
+
+                        else if (quantityMeasured == QuantityMeasured.Current)
+                            currentHarmonicsRow[$"{convertedPhase}H{index-1}"] = Math.Round(value/(double)currentHarmonicsRow[$"{convertedPhase}H{0}"]*100);
+                        
+                    }
+                }
+
+                VoltageHarmonicsTable.Rows.Add(voltageHarmonicsRow);
+                VoltageInterharmonicsTable.Rows.Add(voltageInterharmonicsRow);
+                CurrentHarmonicsTable.Rows.Add(currentHarmonicsRow);
+                CurrentInterharmonicsTable.Rows.Add(currentInterharmonicsRow);
+            }
         }
         await BulkInsertVoltageHarmonicsAsync(VoltageHarmonicsTable);
         await BulkInsertVoltageInterharmonicsAsync(VoltageInterharmonicsTable);
@@ -200,7 +229,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await connection.OpenAsync();
         using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
         {
-            DestinationTableName = "base"
+            DestinationTableName = "trend"
         };
         DataTable table = new DataTable();
         table.Columns.Add("RecordingId", typeof(string));
@@ -208,18 +237,27 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
 
         foreach (var channel in channels)
         {
+            if(channel.Phase.ToString().Contains("LineTo")) continue;
+            if(channel.ChannelName.Contains("L1-N")) channel.Phase = Phase.AN;
+            else if(channel.ChannelName.Contains("L2-N")) channel.Phase = Phase.BN;
+            else if(channel.ChannelName.Contains("L3-N")) channel.Phase = Phase.CN;
+
             foreach (var series in channel.ValueSeries)
             {
                 if (series.QuantityCharacteristic != null && series.QuantityCharacteristic.StartsWith("Spectra by")) continue;
+
+                
+
+                
 
                 if ((series.QuantityCharacteristic != null) && (series.QuantityCharacteristic.Contains("Negative sequence component unbalance (%)") || 
                     series.QuantityCharacteristic.Contains("Zero sequence component unbalance (%)")))
                     series.QuantityCharacteristic = $"{channel.QuantityMeasured} {series.QuantityCharacteristic}";
 
                 string? ColumnName = MeasurementTypes.GetTableColumn(channel.Phase, series.SeriesValueType, series.QuantityUnits.ToString(), series.QuantityCharacteristic);
-                //Console.WriteLine($"Processing channel: {channel.ChannelName}");
-                //Console.WriteLine($"Mapping {channel.Phase} - {series.SeriesValueType} - {series.QuantityUnits} - {series.QuantityCharacteristic} to column {ColumnName}");
-
+/*                 Console.WriteLine($"Processing channel: {channel.ChannelName}");
+                Console.WriteLine($"Mapping {channel.Phase} - {series.SeriesValueType} - {series.QuantityUnits} - {series.QuantityCharacteristic} to column {ColumnName}");
+ */
                 if (ColumnName != null && !ColumnName.Contains("Hx")) table.Columns.Add(ColumnName, typeof(double));
 
             }
@@ -233,30 +271,44 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         for (int i = 0; i < totalMeasurements; i++)
         {
             DateTime timeStamp = pqdifFile.StartTime;
-            DataRow row = table.NewRow();
-            row["RecordingId"] = pqdifFile.RecordingId;
-            row["Time"] = timeStamp.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]).ToUniversalTime();
 
-            foreach (var channel in channels)
+            for (int j = 0; j < 120; j++)
             {
-                foreach (var series in channel.ValueSeries)
-                {
-                    if (series.QuantityCharacteristic != null && series.QuantityCharacteristic.StartsWith("Spectra by")) continue;
-                    string? ColumnName = MeasurementTypes.GetTableColumn(channel.Phase, series.SeriesValueType, series.QuantityUnits.ToString(), series.QuantityCharacteristic);
 
-                    if (ColumnName != null)
+                DataRow row = table.NewRow();
+                row["RecordingId"] = j;
+                row["Time"] = timeStamp.AddSeconds((double)channels[0].TimeSeries.OriginalValues[i]).ToUniversalTime();
+                var rand = new Random();
+
+                foreach (var channel in channels)
+                {
+                    foreach (var series in channel.ValueSeries)
                     {
-                        if (series.OriginalValues.Count <= i)
+                        if (series.QuantityCharacteristic != null && series.QuantityCharacteristic.StartsWith("Spectra by")) continue;
+                        string? ColumnName = MeasurementTypes.GetTableColumn(channel.Phase, series.SeriesValueType, series.QuantityUnits.ToString(), series.QuantityCharacteristic);
+
+                        if (ColumnName != null)
                         {
-                            row[ColumnName] = DBNull.Value;
-                            continue;
+                            if (series.OriginalValues.Count <= i)
+                            {
+                                row[ColumnName] = DBNull.Value;
+                                continue;
+                            }
+                            int sign = rand.Next(0, 2) == 0 ? 1 : -1;
+
+                            if(ColumnName.Contains("PF")) {
+                                row[ColumnName] = (int)((double) series.OriginalValues[i] * (1 + sign * rand.NextDouble() / 100) * 1000);
+                                continue;
+                            }
+
+                            row[ColumnName] = ((double) series.OriginalValues[i] * (1 + sign * rand.NextDouble() / 100));
+
                         }
-                        row[ColumnName] = series.OriginalValues[i];
                     }
                 }
-            }
 
-            table.Rows.Add(row);
+                table.Rows.Add(row);
+            }
         }
         await bulkCopy.WriteToServerAsync(table);
     }
@@ -270,6 +322,7 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         {
             DestinationTableName = "Measurements"
         };
+        string temp = measurements.First().RecordingId +  Random.Shared.Next(100000000, 999999999).ToString();
 
         DataTable table = new DataTable();
         table.Columns.Add("RecordingId", typeof(string));
@@ -285,6 +338,26 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
         await bulkCopy.WriteToServerAsync(table);
     }
 
+    public async Task BulkInsertAsyncNew(IEnumerable<Measurement> measurements)
+    {
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "FreqInt"
+        };
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(string));
+        table.Columns.Add("Timestamp", typeof(DateTime));
+        table.Columns.Add("Value", typeof(int));
+
+        foreach (var measurement in measurements) for (int i = 0; i < 120; i++) table.Rows.Add(i, measurement.timestamp, (int)((measurement.Value +  Random.Shared.NextDouble()/100)*10000));
+
+
+       await bulkCopy.WriteToServerAsync(table); 
+
+    }
     public async Task BulkInsertBigAsync(PqdifFile pqdifFile)
     {
         Channel[] channels = pqdifFile.Channels;
@@ -336,5 +409,262 @@ public class SqlServerMeasurementRepository : IMeasurementRepository
 
         await bulkCopy.WriteToServerAsync(table);
         
+    }
+
+    public async Task BulkInsertFreq60(PqdifFile pqdifFile)
+    {
+        string temp = pqdifFile.RecordingId;
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "Frequency60Columnstore"
+        };
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(int));
+        table.Columns.Add("TimeStamp", typeof(DateTime));
+
+        for (int i = 1; i <= 60; i++) table.Columns.Add($"Freq{i}", typeof(double));
+
+        foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+
+        int totalMeasurements = pqdifFile.Channels[0].TimeSeries.SampleCount / 60;
+        DateTime startTime = pqdifFile.StartTime.AddYears(1);
+
+        for (int i = 0; i < totalMeasurements; i++)
+        {
+            DateTime timeStamp = startTime.AddSeconds((double)pqdifFile.Channels[0].TimeSeries.OriginalValues[i * 60]).ToUniversalTime();
+
+            for (int k = 0; k < 120; k++){
+                
+                DataRow row = table.NewRow();
+                row["RecordingId"] = k;
+                row["TimeStamp"] = timeStamp;
+
+                for (int j = 0; j < 60; j++)
+                {
+                    Series series = pqdifFile.Channels[0].ValueSeries[0];
+                    row[$"Freq{j + 1}"] = (((double)series.OriginalValues[i * 60 + j] + Random.Shared.NextDouble()/100));
+                }
+
+                table.Rows.Add(row);
+            }
+        }
+
+        await bulkCopy.WriteToServerAsync(table);
+    }
+
+    public async Task BulkInsertFreq720(PqdifFile pqdifFile)
+    {
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "Frequency720Int"
+        };  
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(int));
+        table.Columns.Add("TimeStamp", typeof(DateTime));
+
+        for (int i = 1; i <= 720; i++) table.Columns.Add($"Freq{i}", typeof(int));
+
+        foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+
+        int totalMeasurements = pqdifFile.Channels[0].TimeSeries.SampleCount / 720;
+        DateTime startTime = pqdifFile.StartTime;
+
+        for (int i = 0; i < totalMeasurements; i++)
+        {
+            DateTime timeStamp = startTime.AddSeconds((double)pqdifFile.Channels[0].TimeSeries.OriginalValues[i * 720]).ToUniversalTime();
+
+            for (int k = 0; k < 120; k++)
+            {
+
+                DataRow row = table.NewRow();
+                row["RecordingId"] = k;
+                row["TimeStamp"] = timeStamp;
+
+                for (int j = 0; j < 720; j++)
+                {
+                    Series series = pqdifFile.Channels[0].ValueSeries[0];
+                    row[$"Freq{j + 1}"] =(int) (((double) series.OriginalValues[i * 720 + j] + Random.Shared.NextDouble()/100)*10000);
+                }
+
+                table.Rows.Add(row);
+            }
+        }
+
+        await bulkCopy.WriteToServerAsync(table);
+    }
+
+
+    public async Task BulkInsertFreq60Percentage(PqdifFile pqdifFile)
+    {
+        string temp = pqdifFile.RecordingId;
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "Frequency60Percentage"
+        };
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(int));
+        table.Columns.Add("TimeStamp", typeof(DateTime));
+
+        for (int i = 1; i <= 60; i++) table.Columns.Add($"Freq{i}", typeof(double));
+
+        foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+
+        int totalMeasurements = pqdifFile.Channels[0].TimeSeries.SampleCount / 60;
+        DateTime startTime = pqdifFile.StartTime.AddYears(1);
+
+        for (int i = 0; i < totalMeasurements; i++)
+        {
+            DateTime timeStamp = startTime.AddSeconds((double)pqdifFile.Channels[0].TimeSeries.OriginalValues[i * 60]).ToUniversalTime();
+
+            for (int k = 0; k < 120; k++){
+                
+                DataRow row = table.NewRow();
+                row["RecordingId"] = k;
+                row["TimeStamp"] = timeStamp;
+
+                for (int j = 0; j < 60; j++)
+                {
+                    Series series = pqdifFile.Channels[0].ValueSeries[0];
+                    double tempy = ((double)series.OriginalValues[i * 60 + j]+ Random.Shared.NextDouble()/100)/50*10000;
+                    row[$"Freq{j + 1}"] =  Math.Round(tempy);
+                }
+
+                table.Rows.Add(row);
+            }
+        }
+
+        await bulkCopy.WriteToServerAsync(table);
+    }
+
+    public async Task BulkInsertTrends(PqdifFile pqdifFile)
+    {
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "Trends"
+        };
+
+        DataTable table = new DataTable();
+        table.Columns.Add("RecordingId", typeof(int));
+        table.Columns.Add("TimeStamp", typeof(DateTime));
+
+    }
+
+
+
+    public async Task SQLInsertEvents(PqdifFile pqdifFile)
+    {
+       /*  CREATE TABLE PqEvents (
+    PqId INT IDENTITY(1,1) PRIMARY KEY,
+    TypeId INT NOT NULL,
+    RecordingId INT NOT NULL,
+    StartTime DATETIME2(7) NOT NULL,
+    EndTime DATETIME2(7) NOT NULL,
+    
+    -- Compressed waveform data (stored as compressed binary)
+    Timestamp VARBINARY(MAX) NOT NULL,
+    U1 VARBINARY(MAX) NULL,
+    U2 VARBINARY(MAX) NULL,
+    U3 VARBINARY(MAX) NULL,
+    UN VARBINARY(MAX) NULL,
+    U12 VARBINARY(MAX) NULL,
+    U23 VARBINARY(MAX) NULL,
+    U31 VARBINARY(MAX) NULL,
+    I1 VARBINARY(MAX) NULL,
+    I2 VARBINARY(MAX) NULL,
+    I3 VARBINARY(MAX) NULL,
+    [IN] VARBINARY(MAX) NULL
+) WITH (DATA_COMPRESSION = PAGE); */
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync();
+        using SqlBulkCopy bulkCopy = new SqlBulkCopy(connection)
+        {
+            DestinationTableName = "PqEvents"
+        };
+        Channel[] channels = pqdifFile.Channels;
+        DataTable table = new DataTable();
+        table.Columns.Add("TypeId", typeof(int));
+        table.Columns.Add("RecordingId", typeof(int));
+        table.Columns.Add("StartTime", typeof(DateTime));
+        table.Columns.Add("EndTime", typeof(DateTime));
+        table.Columns.Add("Timestamp", typeof(byte[]));
+        object[] timestampValues = channels[0].TimeSeries.OriginalValues.ToArray();
+        Byte[]  timestamp = CompresssionHandler.CompressWaveform(timestampValues);
+
+        for(int i = 0; i < channels.Length; i+=2)
+        {
+            Channel channel = channels[i];
+            if (channel.ChannelName.Contains("Power") || channel.ChannelName.Contains("Frequency") || channel.Phase==Phase.NG || channel.Phase==Phase.Net || channel.Phase.ToString().Contains("General")) continue;
+
+            Series series = channel.ValueSeries[0];
+            QuantityMeasured quantityMeasured = channel.QuantityMeasured;
+            string convertedPhase = PhaseConverter.ConvertPhase(channel.Phase.ToString(), quantityMeasured.ToString());
+            table.Columns.Add(convertedPhase, typeof(byte[]));
+
+
+        }
+
+        foreach (DataColumn col in table.Columns) bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+
+        for(int k = 0; k <= 120; k++)
+        {
+            for (int j = 0; j <= 1; j++)
+            {
+                DataRow row = table.NewRow();
+                row["TypeId"] = j; 
+                row["RecordingId"] = k;
+                row["StartTime"] = pqdifFile.StartTime.AddMilliseconds((double)timestampValues[0]);
+                row["EndTime"] = pqdifFile.StartTime.AddMilliseconds((double)timestampValues[timestampValues.Length - 1]);
+                row["Timestamp"] = timestamp;
+                for(int i = j; i < channels.Length; i+=2)
+                {
+                    Channel channel = channels[i];
+                    
+                    if (channel.ChannelName.Contains("Power") || channel.ChannelName.Contains("Frequency") || channel.Phase==Phase.NG || channel.Phase==Phase.Net || channel.Phase.ToString().Contains("General")) continue;
+
+                    Series series = channel.ValueSeries[0];
+                    QuantityMeasured quantityMeasured = channel.QuantityMeasured;
+                    string convertedPhase = PhaseConverter.ConvertPhase(channel.Phase.ToString(), quantityMeasured.ToString());
+                    Random rand = new Random();
+
+
+                    float[] values = series.OriginalValues
+                        .Select(o => Convert.ToSingle(o))
+                        .ToArray();
+
+ 
+                    float[] modifiedValues = values
+                        .Select(v =>
+                        {
+                            float percent = (float)(rand.NextDouble() * 0.05); 
+                            return v * (1f + percent);
+                        })
+                        .ToArray();
+                    Byte[]  compressedWaveform = CompresssionHandler.CompressWaveform(series.OriginalValues.ToArray());
+                    row[convertedPhase] = compressedWaveform;
+                }
+
+                table.Rows.Add(row);
+            }
+        }
+
+
+        await bulkCopy.WriteToServerAsync(table);
+
+
+
+
+
+
+
+
+
     }
 }

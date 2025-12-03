@@ -7,7 +7,7 @@ namespace PQDIF_Manager
     public class Channel
     {
         public ChannelInstance ChannelInstance { get; private set; }
-        public Phase Phase { get; private set; }
+        public Phase Phase { get;  set; }
         public string? ChannelName { get; private set; }
         public int SeriesCount { get; private set; }
         public QuantityMeasured QuantityMeasured { get; private set; }

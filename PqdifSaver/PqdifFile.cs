@@ -75,7 +75,7 @@ namespace PQDIF_Manager
         {
             List<Measurement> measurements = new();
 
-            ISeriesInfoRepository seriesInfoSaver = new SqlServerSeriesInfoRepository();
+            //ISeriesInfoRepository seriesInfoSaver = new SqlServerSeriesInfoRepository();
 
             foreach (Channel channel in Channels)
             {
@@ -84,13 +84,13 @@ namespace PQDIF_Manager
                 {
                     Series valueSeries = channel.ValueSeries[i];
 
-                    int seriesId = await seriesInfoSaver.GetSeriesIdAsync(
+/*                     int seriesId = await seriesInfoSaver.GetSeriesIdAsync(
                         channel.ChannelName,
                         channel.QuantityMeasured.ToString(),
                         channel.Phase.ToString(),
-                        valueSeries.SeriesValueType);
+                        valueSeries.SeriesValueType); */
 
-                    if (seriesId == 0)
+                    /* if (seriesId == 0)
                     {
                         SeriesInfo seriesInfo = new SeriesInfo
                         {
@@ -102,7 +102,7 @@ namespace PQDIF_Manager
 
                         await seriesInfoSaver.SaveSeriesInfoAsync(seriesInfo);
                         seriesId = seriesInfo.SeriesId;
-                    }
+                    } */
 
                     for (int j = 0; j < timeSeries.SampleCount; j++)
                     {
@@ -113,7 +113,7 @@ namespace PQDIF_Manager
                             RecordingId = RecordingId,
                             timestamp = timestampInUTC,
                             Value = value,
-                            SeriesId = seriesId
+                            SeriesId = 1
                         });
                     }
                 }

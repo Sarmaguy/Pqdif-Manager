@@ -719,7 +719,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>PF1</columnName>
-        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <unit>None</unit><tagQuantityId>True Power Factor - (Vrms * Irms) / P.</tagQuantityId>
         <description>Faktor snage od U1 i I1</description>
       </group>
       <group id="PF">
@@ -728,7 +728,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>PF2</columnName>
-        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <unit>None</unit><tagQuantityId>True Power Factor - (Vrms * Irms) / P.</tagQuantityId>
         <description>Faktor snage od U2 i I2</description>
       </group>
       <group id="PF">
@@ -737,7 +737,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>PF3</columnName>
-        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <unit>None</unit><tagQuantityId>True Power Factor - (Vrms * Irms) / P.</tagQuantityId>
         <description>Faktor snage od U3 i I3</description>
       </group>
       <group id="PF">
@@ -746,16 +746,16 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>PFN</columnName>
-        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <unit>None</unit><tagQuantityId>True Power Factor - (Vrms * Irms) / P.</tagQuantityId>
         <description>Faktor snage od UN i IN</description>
       </group>
       <group id="PF">
         <id />
         <valueType>Average</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>PF</columnName>
-        <unit /><tagQuantityId>ID_QC_PF</tagQuantityId>
+        <unit>None</unit><tagQuantityId>True Power Factor - (Vrms * Irms) / P.</tagQuantityId>
         <description>Faktor snage</description>
       </group>
     </groups>
@@ -766,7 +766,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>P1</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Radna snaga od U1 i I1</description>
         <dataType>float</dataType>
       </group>
@@ -776,7 +776,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>P2</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Radna snaga od U2 i I2</description>
         <dataType>float</dataType>
       </group>
@@ -786,7 +786,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>P3</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Radna snaga od U3 i I3</description>
         <dataType>float</dataType>
       </group>
@@ -796,7 +796,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>PN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Radna snaga od UN i IN</description>
         <dataType>float</dataType>
       </group>
@@ -808,7 +808,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>S1</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Prividna snaga od U1 i I1</description>
         <dataType>float</dataType>
       </group>
@@ -818,7 +818,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>S2</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Prividna snaga od U2 i I2</description>
         <dataType>float</dataType>
       </group>
@@ -828,7 +828,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>S3</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Prividna snaga od U3 i I3</description>
         <dataType>float</dataType>
       </group>
@@ -838,7 +838,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>SN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Prividna snaga od UN i IN</description>
         <dataType>float</dataType>
       </group>
@@ -850,7 +850,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>Q1</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Jalova snaga od U1 i I1</description>
         <dataType>float</dataType>
       </group>
@@ -860,7 +860,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>Q2</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Jalova snaga od U2 i I2</description>
         <dataType>float</dataType>
       </group>
@@ -870,7 +870,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>Q3</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Jalova snaga od U3 i I3</description>
         <dataType>float</dataType>
       </group>
@@ -880,7 +880,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>QN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars  </unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Jalova snaga od UN i IN</description>
         <dataType>float</dataType>
       </group>
@@ -889,30 +889,30 @@
 	  <group id="P">
         <id />
         <valueType>Average</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>P</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Radna snaga</description>
         <dataType>float</dataType>
       </group>		  
 	  <group id="S">
         <id />
         <valueType>Average</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>S</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Prividna snaga</description>
         <dataType>float</dataType>
       </group>
 	  <group id="Q">
         <id />
         <valueType>Average</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>Q</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Jalova snaga</description>
         <dataType>float</dataType>
       </group>
@@ -924,7 +924,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>P1_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Minimalna vrijednost snage P1</description>
       </group>
       <group id="P">
@@ -933,7 +933,7 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>P1_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Maksimalna vrijednost snage P1</description>
       </group>
       <group id="P">
@@ -942,7 +942,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>P2_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Minimalna vrijednost snage P2</description>
       </group>
       <group id="P">
@@ -951,7 +951,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>P2_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Maksimalna vrijednost snage P2</description>
       </group>
       <group id="P">
@@ -960,7 +960,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>P3_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Minimalna vrijednost snage P3</description>
       </group>
       <group id="P">
@@ -969,7 +969,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>P3_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Maksimalna vrijednost snage P3</description>
       </group>
       <group id="P">
@@ -978,7 +978,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>PN_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Minimalna vrijednost snage PN</description>
       </group>
       <group id="P">
@@ -987,7 +987,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>PN_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Maksimalna vrijednost snage PN</description>
       </group>
     </groups>
@@ -998,16 +998,16 @@
         <phase>AN</phase>
         <siPrefix />
         <columnName>S1_MIN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Minimalna vrijednost snage S1</description>
       </group>
       <group id="S">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>AN</phase>
         <siPrefix />
         <columnName>S1_MAX</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Maksimalna vrijednost snage S1</description>
       </group>
       <group id="S">
@@ -1016,7 +1016,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>S2_MIN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Minimalna vrijednost snage S2</description>
       </group>
       <group id="S">
@@ -1025,7 +1025,7 @@
         <phase>BN</phase>
         <siPrefix />
         <columnName>S2_MAX</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Maksimalna vrijednost snage S2</description>
       </group>
       <group id="S">
@@ -1034,7 +1034,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>S3_MIN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Minimalna vrijednost snage S3</description>
       </group>
       <group id="S">
@@ -1043,7 +1043,7 @@
         <phase>CN</phase>
         <siPrefix />
         <columnName>S3_MAX</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Maksimalna vrijednost snage S3</description>
       </group>
       <group id="S">
@@ -1052,7 +1052,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>SN_MIN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Minimalna vrijednost snage SN</description>
       </group>
       <group id="S">
@@ -1061,7 +1061,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>SN_MAX</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Maksimalna vrijednost snage SN</description>
       </group>
     </groups>
@@ -1069,55 +1069,55 @@
       <group id="Q">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>AN</phase>
         <siPrefix />
         <columnName>Q1_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Minimalna vrijednost snage Q1</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>AN</phase>
         <siPrefix />
         <columnName>Q1_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Maksimalna vrijednost snage Q1</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>BN</phase>
         <siPrefix />
         <columnName>Q2_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Minimalna vrijednost snage Q2</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>BN</phase>
         <siPrefix />
         <columnName>Q2_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Maksimalna vrijednost snage Q2</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>CN</phase>
         <siPrefix />
         <columnName>Q3_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Minimalna vrijednost snage Q3</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>CN</phase>
         <siPrefix />
         <columnName>Q3_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Maksimalna vrijednost snage Q3</description>
       </group>
       <group id="Q">
@@ -1126,7 +1126,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>QN_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Minimalna vrijednost snage QN</description>
       </group>
       <group id="Q">
@@ -1135,7 +1135,7 @@
         <phase>NG</phase>
         <siPrefix />
         <columnName>QN_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Maksimalna vrijednost snage QN</description>
       </group>
     </groups>
@@ -1143,55 +1143,55 @@
       <group id="P">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>P_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Minimalna vrijednost snage P</description>
       </group>
       <group id="P">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>P_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_P</tagQuantityId>
+        <unit>Watts</unit><tagQuantityId>Real power (watts)</tagQuantityId>
         <description>Maksimalna vrijednost snage P</description>
       </group>
 	  <group id="S">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>S_MIN</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Minimalna vrijednost snage S</description>
       </group>
       <group id="S">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>S_MAX</columnName>
-        <unit>VA</unit><tagQuantityId>ID_QC_S</tagQuantityId>
+        <unit>VoltAmps</unit><tagQuantityId>Apparent power (VA)</tagQuantityId>
         <description>Maksimalna vrijednost snage S</description>
       </group>
 	  <group id="Q">
         <id />
         <valueType>Minimum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>Q_MIN</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Minimalna vrijednost snage Q</description>
       </group>
       <group id="Q">
         <id />
         <valueType>Maximum</valueType>
-        <phase />
+        <phase>Total</phase>
         <siPrefix />
         <columnName>Q_MAX</columnName>
-        <unit>W</unit><tagQuantityId>ID_QC_Q</tagQuantityId>
+        <unit>Vars</unit><tagQuantityId>Reactive power (VAR)</tagQuantityId>
         <description>Maksimalna vrijednost snage Q</description>
       </group>
 	</groups>

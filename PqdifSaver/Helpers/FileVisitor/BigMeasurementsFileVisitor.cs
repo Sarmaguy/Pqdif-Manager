@@ -11,7 +11,7 @@ public class BigMeasurementsFileVisitor : AbstractFileVisitor
                 Console.WriteLine($"Processing big measurements file: {filePath}");
                 PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(filePath);
                 SqlServerMeasurementRepository measurementRepository = new SqlServerMeasurementRepository();
-                await measurementRepository.BulkInsertBigAsync(pqdifFile);
+/*                 await measurementRepository.BulkInsertBigAsync(pqdifFile); */
                 Console.WriteLine($"Finished uploading big measurements from: {filePath}");
             });
     }

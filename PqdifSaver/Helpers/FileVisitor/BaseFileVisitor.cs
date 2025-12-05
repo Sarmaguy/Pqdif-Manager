@@ -10,8 +10,8 @@ public class BaseFileVisitor : AbstractFileVisitor
             {
                 Console.WriteLine($"Processing base measurements file: {filePath}");
                 PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(filePath);
-                SqlServerMeasurementRepository measurementRepository = new SqlServerMeasurementRepository();
-                await measurementRepository.BulkInsertBaseAsync(pqdifFile);
+                IMeasurementRepository measurementRepository = new SqlServerMeasurementRepository();
+                Inserts inserts = new Inserts(measurementRepository);
                 Console.WriteLine($"Finished uploading base measurements from: {filePath}");
             });
     }

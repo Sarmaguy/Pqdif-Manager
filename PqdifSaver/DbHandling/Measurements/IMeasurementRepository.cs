@@ -1,4 +1,6 @@
+using System.Data;
+
 public interface IMeasurementRepository
 {
-    Task BulkInsertAsync(IEnumerable<Measurement> measurements);
+    Task BulkInsertAsync(string tableName, DataTable dataTable);
 }

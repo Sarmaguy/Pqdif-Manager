@@ -8,6 +8,7 @@ public class ConfigBuilder : ConfigurationBuilder
     public static ConfigBuilder Instance => _instance.Value;
 
     public readonly string ConnectionString;
+    public readonly string DuckDBConnectionString;
 
     private ConfigBuilder() : base()
     {
@@ -15,5 +16,6 @@ public class ConfigBuilder : ConfigurationBuilder
         this.AddJsonFile(path, optional: false, reloadOnChange: true);
         var config = this.Build();
         ConnectionString = config.GetConnectionString("DefaultConnection");
+        DuckDBConnectionString = config.GetConnectionString("DuckDBConnection");
     }
 }

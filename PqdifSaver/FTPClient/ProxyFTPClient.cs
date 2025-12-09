@@ -15,6 +15,11 @@ public class ProxyFTPClient
         
         using (var client = new AsyncFtpClient(_ftpHost, _username, _password))
         {
+            //Force LIST mode if MLSD is problematic
+            //client.Config.ListingParser = FtpParser.Windows;  
+            // OR disable MLSD entirely:
+            client.Config.DataConnectionType = FtpDataConnectionType.PASV;
+
             await client.Connect();
             
             // Handle first day with modification time check
@@ -78,15 +83,33 @@ public class ProxyFTPClient
                 
                 if (await client.DirectoryExists(pqdifPath))
                 {
-                    // Check if any files in PQDIF folder were modified after afterDateTime
                     var pqdifFiles = await client.GetListing(pqdifPath, FtpListOption.Recursive);
-                    var modifiedFiles = pqdifFiles
-                        .Where(f => f.Type == FtpObjectType.File && f.Modified >= afterDateTime)
-                        .ToList();
+                    var modifiedFiles = new List<FtpListItem>();
+                    
+                    // Verify each file's modification time using MDTM
+                    foreach (var file in pqdifFiles.Where(f => f.Type == FtpObjectType.File))
+                    {
+                        try
+                        {
+                            // Use MDTM command directly for accurate timestamp
+                            var modTime = await client.GetModifiedTime(file.FullName);
+                            if (modTime >= afterDateTime)
+                            {
+                                modifiedFiles.Add(file);
+                            }
+                        }
+                        catch
+                        {
+                            // If MDTM fails, fall back to parsed Modified property
+                            if (file.Modified >= afterDateTime)
+                            {
+                                modifiedFiles.Add(file);
+                            }
+                        }
+                    }
                     
                     if (modifiedFiles.Any())
                     {
-                        // Download entire folder if any file was modified
                         string localFolder = Path.Combine(localDownloadPath, 
                             $"{date:yyyy-MM-dd}", subfolder.Name, "PQDIF");
                         Directory.CreateDirectory(localFolder);

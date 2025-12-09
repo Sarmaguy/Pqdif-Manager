@@ -30,7 +30,7 @@ string rootFolder = @"C:\Users\Jura\Desktop\P3003845"; //lokacija foldera
 */
 
 ProxyFTPClient client = new ProxyFTPClient();
-List<string> l = await client.DownloadPqdFilesWithEdgeCaseAsync( DateTime.Parse("14.11.2025. 23:59"),@"C:\Users\Jura\Desktop\Target" );
+List<string> l = await client.DownloadPqdFilesWithEdgeCaseAsync( DateTime.Parse("12.11.2025. 23:59"),@"C:\Users\Jura\Desktop\Target" );
 
 foreach (var file in l)
     {

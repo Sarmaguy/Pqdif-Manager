@@ -31,12 +31,13 @@ string rootFolder = @"C:\Users\Jura\Desktop\P3003845"; //lokacija foldera
 
 
     await fileVisitor.VisitDirectoryAsync(rootFolder); */
-DuckDbManager.CreateTables();
-string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_06\Day_01\2025-06-01_Trends-Stats\PQDIF\P3003845_2025-06-01_Trends-Stats_PQDIF.pqd";
+/* DuckDbManager.CreateTables();
+string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_06\Day_01\2025-06-01_Trends-Stats\PQDIF\P3003845_2025-06-01_10Min_ClassA_PQDIF.pqd";
 
 Inserts inserts = new Inserts(new DuckDbMeasurementRepository());
 PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(path);
 await inserts.BulkInsertBaseAsync(pqdifFile);
+await inserts.BulkInsertHarmonicsAsync(pqdifFile); */
 
 using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnectionString))
         {
@@ -45,36 +46,9 @@ using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnec
             // List all tables
             using (var cmd = connection.CreateCommand())
             {
-                cmd.CommandText = "SHOW TABLES;";
-                using (var reader = cmd.ExecuteReader())
-                {
-                    Console.WriteLine("Tables in database:");
-                    while (reader.Read())
-                    {
-                        Console.WriteLine(reader.GetString(0));
-                    }
-                }
+                cmd.CommandText = "CHECKPOINT;";
+                cmd.ExecuteNonQuery();
             }
-
-            using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT * FROM base LIMIT 10;";
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        Console.WriteLine("\nFirst 10 rows from VoltageHarmonics:");
-
-                        while (reader.Read())
-                        {
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                string columnName = reader.GetName(i);  // Get column name
-                                object value = reader.GetValue(i);      // Get column value
-                                Console.Write($"{columnName}: {value}  ");
-                            }
-                            Console.WriteLine(); // New line after each row
-                        }
-                    }
-                }
         }
 
 /* using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnectionString))

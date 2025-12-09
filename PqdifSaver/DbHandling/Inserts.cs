@@ -35,7 +35,7 @@ public class Inserts
         var populator = new BaseDataPopulator();
         
         await populator.PopulateAsync(table, pqdifFile);
-        await _MeasurementRepository.BulkInsertAsync("trend", table);
+        await _MeasurementRepository.BulkInsertAsync("base", table);
     }
 
     private (DataTable VoltageHarmonics, DataTable VoltageInterharmonics, 
@@ -90,9 +90,9 @@ public class Inserts
     // Simplified frequency methods using the new pattern
     public async Task BulkInsertFreq60(PqdifFile pqdifFile)
     {
-        var table = CreateFrequencyTable(MeasurementConstants.FrequencySampleSize60, typeof(double));
-        PopulateFrequencyTable(table, pqdifFile, MeasurementConstants.FrequencySampleSize60, false, 1);
-        await _MeasurementRepository.BulkInsertAsync("Frequency60Columnstore", table);
+        var table = CreateFrequencyTable(MeasurementConstants.FrequencySampleSize60, typeof(int));
+        PopulateFrequencyTable(table, pqdifFile, MeasurementConstants.FrequencySampleSize60, true, 1);
+        await _MeasurementRepository.BulkInsertAsync("Frequency60Percentage", table);
     }
 
     public async Task BulkInsertFreq720(PqdifFile pqdifFile)
@@ -129,7 +129,7 @@ public class Inserts
                 .AddSeconds((double)pqdifFile.Channels[0].TimeSeries.OriginalValues[i * sampleSize])
                 .ToUniversalTime();
 
-            for (int recordingId = 0; recordingId < MeasurementConstants.RecordingsPerMeasurement; recordingId++)
+            for (int recordingId = 0; recordingId < 1; recordingId++)
             {
                 var row = table.NewRow();
                 row["RecordingId"] = recordingId;
@@ -141,7 +141,7 @@ public class Inserts
                     
                     if (asInteger)
                     {
-                        row[$"Freq{j + 1}"] = _randomizer.AdjustValueAsInt(value);
+                        row[$"Freq{j + 1}"] = (int) Math.Round(_randomizer.AdjustValueAsInt(value) / 50d*10000);
                     }
                     else
                     {

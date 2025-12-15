@@ -29,6 +29,17 @@ public class Inserts
         );
     }
 
+    public async Task BulkInsertEventsAsync(PqdifFile pqdifFile)
+    {
+        var dataBuilder = new EventTableBuilder();
+        var populator = new EventTablePopulator();
+        var table = dataBuilder.Build();
+
+        await populator.PopulateAsync(table, pqdifFile);
+
+        await _MeasurementRepository.BulkInsertAsync(table.TableName, table);
+    }
+
     public async Task BulkInsertBaseAsync(PqdifFile pqdifFile)
     {
         var table = CreateBaseDataTable(pqdifFile.Channels);
@@ -115,6 +126,8 @@ public class Inserts
 
         return table;
     }
+
+
 
     private void PopulateFrequencyTable(DataTable table, PqdifFile pqdifFile, 
         int sampleSize, bool asInteger, int yearOffset)

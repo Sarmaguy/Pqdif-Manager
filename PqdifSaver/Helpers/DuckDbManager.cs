@@ -177,6 +177,30 @@ public static class DuckDbManager
         cmd.CommandText += ");";
         cmd.ExecuteNonQuery();
 
+        // --- 8. Events Table ---
+        cmd.CommandText = 
+        @"  CREATE TABLE PqEvents (
+                TypeId      INTEGER NOT NULL,
+                RecordingId INTEGER NOT NULL,
+                StartTime   TIMESTAMP NOT NULL,
+                EndTime     TIMESTAMP NOT NULL,
+
+                -- Compressed waveform data (stored as binary blobs)
+                Timestamp   BLOB NOT NULL,
+                U1          BLOB,
+                U2          BLOB,
+                U3          BLOB,
+                UN          BLOB,
+                U12         BLOB,
+                U23         BLOB,
+                U31         BLOB,
+                I1          BLOB,
+                I2          BLOB,
+                I3          BLOB,
+                ""IN""          BLOB
+            );";
+            cmd.ExecuteNonQuery();
+
         Console.WriteLine("All DuckDB tables created successfully!");
     }
 }

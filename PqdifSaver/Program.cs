@@ -31,35 +31,20 @@ string rootFolder = @"C:\Users\Jura\Desktop\P3003845"; //lokacija foldera
 
 
     await fileVisitor.VisitDirectoryAsync(rootFolder); */
-/* DuckDbManager.CreateTables();
-string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_06\Day_01\2025-06-01_Trends-Stats\PQDIF\P3003845_2025-06-01_10Min_ClassA_PQDIF.pqd";
+DuckDbManager.CreateTables();
+string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_06\Day_04\T_07-58-28-394_Voltage_Sag\PQDIF\P3003845_2025-06-04_T_07-58-28-394_Voltage_Sag_PQDIF.pqd";
 
 Inserts inserts = new Inserts(new DuckDbMeasurementRepository());
 PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(path);
-await inserts.BulkInsertBaseAsync(pqdifFile);
-await inserts.BulkInsertHarmonicsAsync(pqdifFile); */
+await inserts.BulkInsertEventsAsync(pqdifFile);
 
-using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnectionString))
-        {
-            connection.Open();
-
-            // List all tables
-            using (var cmd = connection.CreateCommand())
-            {
-                cmd.CommandText = "CHECKPOINT;";
-                cmd.ExecuteNonQuery();
-            }
-        }
 
 /* using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnectionString))
 {
     connection.Open();
 
         using var cmd = connection.CreateCommand();
-        cmd.CommandText = "TRUNCATE TABLE VoltageHarmonics;";
-        cmd.CommandText = "TRUNCATE TABLE CurrentHarmonics;";
-        cmd.CommandText = "TRUNCATE TABLE VoltageInterharmonics;";
-        cmd.CommandText = "TRUNCATE TABLE CurrentInterharmonics;";
+        cmd.CommandText = "Drop TABLE PqEvents";
         cmd.ExecuteNonQuery();
 } */
 

@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DuckDB.NET.Data;
+using FluentFTP;
 using Gemstone.PQDIF.Logical;
 using Microsoft.VisualBasic;
 using PQDIF_Manager;

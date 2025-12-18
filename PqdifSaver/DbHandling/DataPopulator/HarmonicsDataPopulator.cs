@@ -5,6 +5,8 @@ using PQDIF_Manager;
 public class HarmonicsDataPopulator : IDataPopulator
 {
     private readonly ValueRandomizer _randomizer = new();
+    private static double FirstCurrentHarmonic;
+    private static double FirstVoltageHarmonic;
 
     public async Task PopulateAsync(DataTable table, PqdifFile pqdifFile)
     {
@@ -90,12 +92,17 @@ public class HarmonicsDataPopulator : IDataPopulator
     private void SetHarmonicValue(DataRow row, Channel channel, string phase, int index, double value)
     {
         bool isInterharmonic = channel.ChannelName.Contains("Interharmonic");
+        bool isCurrent = channel.ChannelName.Contains("Current");
         string suffix = isInterharmonic ? "IH" : "H";
         
-        if (index == (isInterharmonic ? 0 : 1))
+        if (index == 1 && !isInterharmonic)
         {
             // Base value
-            row[$"{phase}{suffix}{(isInterharmonic ? index : 0)}"] = (int)Math.Round(value*100);
+            row[$"{phase}{suffix}1"] = (int)Math.Round(value*100);
+
+            if (isCurrent) FirstCurrentHarmonic = (int)Math.Round(value*100);
+            else FirstVoltageHarmonic = (int)Math.Round(value*100);
+
         }
         else
         {

@@ -33,11 +33,11 @@ string rootFolder = @"C:\Users\Jura\Desktop\P3003845"; //lokacija foldera
 
     await fileVisitor.VisitDirectoryAsync(rootFolder); */
 DuckDbManager.CreateTables();
-string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_06\Day_04\T_07-58-28-394_Voltage_Sag\PQDIF\P3003845_2025-06-04_T_07-58-28-394_Voltage_Sag_PQDIF.pqd";
+string path = @"C:\Users\Jura\Desktop\P3003845\2025\Month_05\Day_02\2025-05-02_Trends-Stats\PQDIF\P3003845_2025-05-02_10Sec_Frequency_ClassA.pqd";
 
-Inserts inserts = new Inserts(new DuckDbMeasurementRepository());
+Inserts inserts = new Inserts(new SqlServerMeasurementRepository());
 PqdifFile pqdifFile = await PqdifFile.LoadFromFileAsync(path);
-await inserts.BulkInsertEventsAsync(pqdifFile);
+await inserts.BulkInsertFreq60(pqdifFile);
 
 
 /* using (var connection = new DuckDBConnection(ConfigBuilder.Instance.DuckDBConnectionString))

@@ -98,12 +98,12 @@ public class Inserts
         return table;
     }
 
-    // Simplified frequency methods using the new pattern
+
     public async Task BulkInsertFreq60(PqdifFile pqdifFile)
     {
         var table = CreateFrequencyTable(MeasurementConstants.FrequencySampleSize60, typeof(int));
         PopulateFrequencyTable(table, pqdifFile, MeasurementConstants.FrequencySampleSize60, true, 1);
-        await _MeasurementRepository.BulkInsertAsync("Frequency60Percentage", table);
+        await _MeasurementRepository.BulkInsertAsync("Frequency60ColumnstoreInt", table);
     }
 
     public async Task BulkInsertFreq720(PqdifFile pqdifFile)
@@ -118,6 +118,9 @@ public class Inserts
         var table = new DataTable();
         table.Columns.Add("RecordingId", typeof(int));
         table.Columns.Add("TimeStamp", typeof(DateTime));
+        table.Columns.Add("F_AVG",typeof(int));
+        table.Columns.Add("F_MIN", dataType);
+        table.Columns.Add("F_MAX", dataType);
 
         for (int i = 1; i <= sampleSize; i++)
         {
@@ -147,19 +150,45 @@ public class Inserts
                 var row = table.NewRow();
                 row["RecordingId"] = recordingId;
                 row["TimeStamp"] = timestamp;
+                double min = double.MaxValue;
+                double max = double.MinValue;
+                double sum = 0.0;
 
                 for (int j = 0; j < sampleSize; j++)
                 {
-                    double value = (double)series.OriginalValues[i * sampleSize + j];
+                    double rawValue = (double)series.OriginalValues[i * sampleSize + j];
                     
                     if (asInteger)
                     {
-                        row[$"Freq{j + 1}"] = (int) Math.Round(_randomizer.AdjustValueAsInt(value) / 50d*10000);
+                        var intVal = (int)Math.Round(_randomizer.AdjustValueAsInt(rawValue)* 1000d);
+                        row[$"Freq{j + 1}"] = intVal;
+                        sum += intVal;
+                        if (intVal < min) min = intVal;
+                        if (intVal > max) max = intVal;
                     }
                     else
                     {
-                        row[$"Freq{j + 1}"] = _randomizer.AdjustValue(value, 0.01);
+                        var dblVal = _randomizer.AdjustValue(rawValue, 0.01);
+                        row[$"Freq{j + 1}"] = dblVal;
+                        sum += dblVal;
+                        if (dblVal < min) min = dblVal;
+                        if (dblVal > max) max = dblVal;
                     }
+                }
+
+                var avg = sum / sampleSize;
+                if (asInteger)
+                {
+                    row["F_AVG"] = (int)Math.Round(avg);
+                    row["F_MIN"] = (int)Math.Round(min);
+                    row["F_MAX"] = (int)Math.Round(max);
+                }
+                else
+                {
+
+                    row["F_AVG"] = (int)Math.Round(avg);
+                    row["F_MIN"] = min;
+                    row["F_MAX"] = max;
                 }
 
                 table.Rows.Add(row);

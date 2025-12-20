@@ -24,6 +24,8 @@ public class HarmonicsTableBuilder : IDataTableBuilder
 
         for (int i = 0; i < _maxHarmonics; i++)
         {
+            if( i == 0 && _suffix == "IH")
+                continue;
             AddPhaseColumns(i);
             if (_includeNeutral)
                 _table.Columns.Add($"{_columnPrefix}N{_suffix}{i}", typeof(int));
@@ -39,6 +41,8 @@ public class HarmonicsTableBuilder : IDataTableBuilder
         {
             // Phase-to-neutral: U1H0, U2H0, U3H0
             _table.Columns.Add($"{_columnPrefix}{phase}{_suffix}{harmonicIndex}", typeof(int));
+
+            if(_columnPrefix != "U") continue;
             
             // Phase-to-phase: U12H0, U23H0, U31H0
             int nextPhase = (phase % 3) + 1;

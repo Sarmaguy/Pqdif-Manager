@@ -14,7 +14,7 @@ public class Inserts
     public async Task BulkInsertHarmonicsAsync(PqdifFile pqdifFile)
     {
         var tables = CreateHarmonicsTables();
-        var populator = new HarmonicsDataPopulator();
+        var populator = new HarmonicsDataPopulator(pqdifFile);
 
         await populator.PopulateAsync(tables.VoltageHarmonics, pqdifFile);
         await populator.PopulateAsync(tables.VoltageInterharmonics, pqdifFile);

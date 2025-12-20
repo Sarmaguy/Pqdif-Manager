@@ -5,16 +5,33 @@ using PQDIF_Manager;
 public class HarmonicsDataPopulator : IDataPopulator
 {
     private readonly ValueRandomizer _randomizer = new();
-    private static double FirstCurrentHarmonic;
-    private static double FirstVoltageHarmonic;
+    private static Dictionary<string, IList<object>> FirstHarmonic =  new Dictionary<string, IList<object>>();
+
+    public HarmonicsDataPopulator(PqdifFile pqdifFile)
+    {
+        Channel[] channels = pqdifFile.Channels;
+        foreach (var channel in channels)
+        {
+            if (channel.ChannelName.Contains("Harmonic") && ExtractHarmonicIndex(channel.ChannelName) == 1)
+            {
+                Series series = channel.ValueSeries[0];
+                var phase = PhaseConverter.ConvertPhase(
+                    channel.Phase.ToString(), 
+                    channel.QuantityMeasured.ToString()
+                );
+
+                FirstHarmonic[phase] = series.OriginalValues;
+            }
+        }
+    }
 
     public async Task PopulateAsync(DataTable table, PqdifFile pqdifFile)
     {
         var channels = pqdifFile.Channels;
         int totalMeasurements = channels[0].TimeSeries.SampleCount;
         DateTime startTime = pqdifFile.StartTime;
-        string type = (table.Columns.Contains("U1H0") || table.Columns.Contains("U1IH0") )  ? "Voltage" : "Current";
-        string harmonicType = (table.Columns.Contains("U1H0") || table.Columns.Contains("I1H0") )  ? "Harmonic" : "Interharmonic";
+        string type = (table.Columns.Contains("U1H1") || table.Columns.Contains("U1IH1") )  ? "Voltage" : "Current";
+        string harmonicType = (table.Columns.Contains("U1H1") || table.Columns.Contains("I1H1") )  ? "Harmonic" : "Interharmonic";
 
 
         for (int measurementIndex = 0; measurementIndex < totalMeasurements; measurementIndex++)
@@ -80,7 +97,7 @@ public class HarmonicsDataPopulator : IDataPopulator
 
         var value = _randomizer.AdjustValue((double)series.OriginalValues[measurementIndex], 0.001);
         
-        SetHarmonicValue(row, channel, phase, harmonicIndex.Value, value);
+        SetHarmonicValue(row, channel, phase, harmonicIndex.Value, value, measurementIndex);
     }
 
     private int? ExtractHarmonicIndex(string channelName)
@@ -89,7 +106,7 @@ public class HarmonicsDataPopulator : IDataPopulator
         return match.Success ? int.Parse(match.Groups[1].Value) : null;
     }
 
-    private void SetHarmonicValue(DataRow row, Channel channel, string phase, int index, double value)
+    private void SetHarmonicValue(DataRow row, Channel channel, string phase, int index, double value, int measurementIndex)
     {
         bool isInterharmonic = channel.ChannelName.Contains("Interharmonic");
         bool isCurrent = channel.ChannelName.Contains("Current");
@@ -100,18 +117,14 @@ public class HarmonicsDataPopulator : IDataPopulator
             // Base value
             row[$"{phase}{suffix}1"] = (int)Math.Round(value*100);
 
-            if (isCurrent) FirstCurrentHarmonic = (int)Math.Round(value*100);
-            else FirstVoltageHarmonic = (int)Math.Round(value*100);
-
         }
         else
         {
             // Percentage value
-            string baseColumn = $"{phase}{suffix}0";
-            if (row[baseColumn] != DBNull.Value && (int)row[baseColumn] != 0)
+            if (FirstHarmonic[phase][measurementIndex] != DBNull.Value && (double)FirstHarmonic[phase][measurementIndex] != 0)
             {
-                int targetIndex = isInterharmonic ? index : index - 1;
-                row[$"{phase}{suffix}{targetIndex}"] = (int) Math.Round(value*100 / (int)row[baseColumn] * 100);
+                int targetIndex = isInterharmonic ? index + 1 : index; // TODO: namješteno za PQube - provjeriti kasnije
+                row[$"{phase}{suffix}{targetIndex}"] = (int) Math.Round(value*100 / (double)FirstHarmonic[phase][measurementIndex] * 100);
             }
         }
     }

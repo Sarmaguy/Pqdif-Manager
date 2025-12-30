@@ -1,7 +1,13 @@
 using System.Data;
 
+/// <summary>
+/// Builds the schema for the PqEvents table, including event metadata and waveform binary columns.
+/// </summary>
 public class EventTableBuilder : IDataTableBuilder
 {
+    /// <summary>
+    /// Constructs a DataTable representing the PqEvents schema.
+    /// </summary>
     public DataTable Build()
     {
         var table = new DataTable("PqEvents");

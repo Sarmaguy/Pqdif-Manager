@@ -1,7 +1,16 @@
 using System.IO.Compression;
 
+/// <summary>
+/// Provides static methods for compressing and decompressing waveform data using GZip.
+/// Supports both float[] and object[] input for compression.
+/// </summary>
 public class CompresssionHandler
 {
+    /// <summary>
+    /// Compresses an array of float values into a GZip-compressed byte array.
+    /// </summary>
+    /// <param name="values">The float array to compress.</param>
+    /// <returns>Compressed byte array, or null if input is null or empty.</returns>
     public static byte[] CompressWaveform(float[] values)
     {
         if (values == null || values.Length == 0)
@@ -22,6 +31,11 @@ public class CompresssionHandler
         }
     }
 
+    /// <summary>
+    /// Compresses an array of objects (converted to float) into a GZip-compressed byte array.
+    /// </summary>
+    /// <param name="values">The object array to compress.</param>
+    /// <returns>Compressed byte array, or null if input is null or empty.</returns>
     public static byte[] CompressWaveform(object[] values)
     {
         if (values == null || values.Length == 0)
@@ -33,6 +47,11 @@ public class CompresssionHandler
         return CompressWaveform(floatValues);
     }
     
+    /// <summary>
+    /// Decompresses a GZip-compressed byte array into a float array.
+    /// </summary>
+    /// <param name="compressed">The compressed byte array.</param>
+    /// <returns>Decompressed float array, or null if input is null or empty.</returns>
     public static float[] DecompressWaveform(byte[] compressed)
     {
         if (compressed == null || compressed.Length == 0)

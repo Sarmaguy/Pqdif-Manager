@@ -1,7 +1,14 @@
 using PQDIF_Manager;
 
+/// <summary>
+/// File visitor for processing base measurement PQDIF files using rule-based actions.
+/// Inherits from AbstractFileVisitor and adds a rule for 10Min_ClassA_PQDIF files.
+/// </summary>
 public class BaseFileVisitor : AbstractFileVisitor
 {
+    /// <summary>
+    /// Initializes the BaseFileVisitor and adds a rule for processing base measurement files.
+    /// </summary>
     public BaseFileVisitor()
     {
         AddRule(

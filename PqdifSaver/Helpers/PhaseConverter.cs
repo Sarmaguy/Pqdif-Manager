@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides static methods for converting phase identifiers to standardized column names for voltage and current.
+/// </summary>
 public class PhaseConverter
 {
     private static readonly Dictionary<string, string> voltageMap = new Dictionary<string, string>
@@ -25,6 +28,13 @@ public class PhaseConverter
         { "N",  "IN" } 
     };
 
+    /// <summary>
+    /// Converts a phase identifier and type (voltage/current) to a standardized column name.
+    /// </summary>
+    /// <param name="phase">The phase identifier (e.g., "AN", "AB").</param>
+    /// <param name="type">The type of measurement ("voltage" or "current").</param>
+    /// <returns>The standardized column name.</returns>
+    /// <exception cref="ArgumentException">Thrown if the type or phase is not recognized.</exception>
     public static string ConvertPhase(string phase, string type)
     {
         if (type.ToLower() == "voltage")

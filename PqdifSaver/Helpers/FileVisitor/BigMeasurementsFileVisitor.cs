@@ -1,7 +1,14 @@
 using PQDIF_Manager;
 
+/// <summary>
+/// File visitor for processing large measurement PQDIF files using rule-based actions.
+/// Inherits from AbstractFileVisitor and adds a rule for 10Min_ClassA_PQDIF files.
+/// </summary>
 public class BigMeasurementsFileVisitor : AbstractFileVisitor
 {
+    /// <summary>
+    /// Initializes the BigMeasurementsFileVisitor and adds a rule for processing big measurement files.
+    /// </summary>
     public BigMeasurementsFileVisitor()
     {
         AddRule(

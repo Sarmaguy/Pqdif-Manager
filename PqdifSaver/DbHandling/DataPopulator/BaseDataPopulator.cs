@@ -2,10 +2,19 @@ using System.Data;
 using Gemstone.PQDIF.Logical;
 using PQDIF_Manager;
 
+/// <summary>
+/// Provides an implementation for populating a DataTable for Base table with measurement data from a PQDIF file.
+/// Handles channel preprocessing, timestamp calculation, and value mapping for measurement series.
+/// </summary>
 public class BaseDataPopulator : IDataPopulator
 {
     private readonly ValueRandomizer _randomizer = new();
 
+    /// <summary>
+    /// Populates the provided DataTable with measurement data extracted from the PQDIF file.
+    /// </summary>
+    /// <param name="table">The DataTable to populate.</param>
+    /// <param name="pqdifFile">The PQDIF file containing measurement data.</param>
     public async Task PopulateAsync(DataTable table, PqdifFile pqdifFile)
     {
         var channels = PreprocessChannels(pqdifFile.Channels);
@@ -13,12 +22,11 @@ public class BaseDataPopulator : IDataPopulator
 
         for (int i = 0; i < totalMeasurements; i++)
         {
-            for (int recordingId = 0; recordingId < 1; recordingId++) // Za potrebe testiranja
+            for (int recordingId = 0; recordingId < 120; recordingId++) // Za potrebe testiranja
             {
                 var row = table.NewRow();
                 row["RecordingId"] = recordingId;
                 row["Time"] = CalculateTimestamp(pqdifFile.StartTime, channels[0], i);
-                
                 PopulateSeriesData(row, channels, i);
                 table.Rows.Add(row);
             }
@@ -27,6 +35,11 @@ public class BaseDataPopulator : IDataPopulator
         await Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Normalizes phases for all channels and returns the processed array.
+    /// </summary>
+    /// <param name="channels">Array of channels to preprocess.</param>
+    /// <returns>Processed array of channels.</returns>
     private Channel[] PreprocessChannels(Channel[] channels)
     {
         foreach (var channel in channels)
@@ -36,6 +49,10 @@ public class BaseDataPopulator : IDataPopulator
         return channels;
     }
 
+    /// <summary>
+    /// Sets the Phase property of a channel based on its name. THIS IS A WORKAROUND FOR BAD DATA!!!
+    /// </summary>
+    /// <param name="channel">The channel to normalize.</param>
     private void NormalizePhase(Channel channel)
     {
         if (channel.ChannelName.Contains("L1-N")) channel.Phase = Phase.AN;
@@ -43,6 +60,13 @@ public class BaseDataPopulator : IDataPopulator
         else if (channel.ChannelName.Contains("L3-N")) channel.Phase = Phase.CN;
     }
 
+    /// <summary>
+    /// Calculates the timestamp for a measurement index based on the channel's time series.
+    /// </summary>
+    /// <param name="startTime">The start time of the PQDIF file.</param>
+    /// <param name="channel">The channel containing the time series.</param>
+    /// <param name="index">The measurement index.</param>
+    /// <returns>The calculated timestamp as a DateTime.</returns>
     private DateTime CalculateTimestamp(DateTime startTime, Channel channel, int index)
     {
         return startTime
@@ -50,6 +74,12 @@ public class BaseDataPopulator : IDataPopulator
             .ToUniversalTime();
     }
 
+    /// <summary>
+    /// Populates a DataRow with measurement values from all relevant channels and series.
+    /// </summary>
+    /// <param name="row">The DataRow to populate.</param>
+    /// <param name="channels">Array of channels to extract data from.</param>
+    /// <param name="measurementIndex">The measurement index to use.</param>
     private void PopulateSeriesData(DataRow row, Channel[] channels, int measurementIndex)
     {
         foreach (var channel in channels)
@@ -71,12 +101,23 @@ public class BaseDataPopulator : IDataPopulator
         }
     }
 
+    /// <summary>
+    /// Determines if a series should be skipped based on its characteristic.
+    /// </summary>
+    /// <param name="series">The series to check.</param>
+    /// <returns>True if the series should be skipped; otherwise, false.</returns>
     private bool ShouldSkipSeries(Series series)
     {
         return series.QuantityCharacteristic != null && 
                series.QuantityCharacteristic.StartsWith("Spectra by");
     }
 
+    /// <summary>
+    /// Gets the column name for a given channel and series, using MeasurementTypes mapping.
+    /// </summary>
+    /// <param name="channel">The channel.</param>
+    /// <param name="series">The series.</param>
+    /// <returns>The column name, or null if not applicable.</returns>
     private string? GetColumnName(Channel channel, Series series)
     {
         var characteristic = series.QuantityCharacteristic;
@@ -95,6 +136,12 @@ public class BaseDataPopulator : IDataPopulator
         );
     }
 
+    /// <summary>
+    /// Sets the value for a specific column in the DataRow based on the series data.
+    /// <param name="row">The DataRow to update.</param>
+    /// <param name="series">The series providing the value.</param>
+    /// <param name="columnName">The column name to set.</param>
+    /// <param name="index">The measurement index.</param>
     private void SetSeriesValue(DataRow row, Series series, string columnName, int index)
     {
         if (series.OriginalValues.Count <= index)

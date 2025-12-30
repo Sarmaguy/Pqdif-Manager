@@ -2,15 +2,28 @@ using System.Data;
 using DuckDB.NET.Data;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Implements IMeasurementRepository for bulk inserting measurement data into DuckDB.
+/// Handles schema discovery, column mapping, and efficient appending of DataTable rows.
+/// </summary>
 public class DuckDbMeasurementRepository : IMeasurementRepository
 {
     private readonly string _connectionString;
 
+    /// <summary>
+    /// Initializes a new repository using the DuckDB connection string from configuration.
+    /// </summary>
     public DuckDbMeasurementRepository()
     {
         _connectionString = ConfigBuilder.Instance.DuckDBConnectionString;        
     }
 
+    /// <summary>
+    /// Performs a bulk insert of all rows in the provided DataTable into the specified DuckDB table.
+    /// Handles column order, type conversion, and missing columns.
+    /// </summary>
+    /// <param name="tableName">The name of the DuckDB table to insert into.</param>
+    /// <param name="dataTable">The DataTable containing data to insert.</param>
     public async Task BulkInsertAsync(string tableName, DataTable dataTable)
     {
         using var connection = new DuckDBConnection(_connectionString);

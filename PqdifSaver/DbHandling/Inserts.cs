@@ -1,16 +1,29 @@
 using System.Data;
 using PQDIF_Manager;
 
+/// <summary>
+/// Provides high-level bulk insert operations for harmonics, events, base, and frequency measurement data.
+/// Handles table creation, data population, and repository interaction.
+/// THIS IS TEMPORARY FOR TESTING PURPOSES ONLY!!! CODE WILL BE REFACTORED LATER IN INDIVIDUAL SERVICES
+/// </summary>
 public class Inserts
 {
     private readonly IMeasurementRepository _MeasurementRepository;
     private readonly ValueRandomizer _randomizer = new();
 
+    /// <summary>
+    /// Initializes a new instance of the Inserts class with the specified measurement repository.
+    /// </summary>
+    /// <param name="measurementRepository">The repository to use for bulk inserts.</param>
     public Inserts(IMeasurementRepository measurementRepository)
     {
         _MeasurementRepository = measurementRepository;
     }
 
+    /// <summary>
+    /// Populates and bulk-inserts harmonics and interharmonics data for voltage and current.
+    /// </summary>
+    /// <param name="pqdifFile">The PQDIF file containing measurement data.</param>
     public async Task BulkInsertHarmonicsAsync(PqdifFile pqdifFile)
     {
         var tables = CreateHarmonicsTables();
@@ -22,13 +35,17 @@ public class Inserts
         await populator.PopulateAsync(tables.CurrentInterharmonics, pqdifFile);
 
         await Task.WhenAll(
-            _MeasurementRepository.BulkInsertAsync("VoltageHarmonics", tables.VoltageHarmonics),
-            _MeasurementRepository.BulkInsertAsync("VoltageInterharmonics", tables.VoltageInterharmonics),
-            _MeasurementRepository.BulkInsertAsync("CurrentHarmonics", tables.CurrentHarmonics),
-            _MeasurementRepository.BulkInsertAsync("CurrentInterharmonics", tables.CurrentInterharmonics)
+            _MeasurementRepository.BulkInsertAsync("VoltageHarmonicsNew", tables.VoltageHarmonics),
+            _MeasurementRepository.BulkInsertAsync("VoltageInterharmonicsNew", tables.VoltageInterharmonics),
+            _MeasurementRepository.BulkInsertAsync("CurrentHarmonicsNew", tables.CurrentHarmonics),
+            _MeasurementRepository.BulkInsertAsync("CurrentInterharmonicsNew", tables.CurrentInterharmonics)
         );
     }
 
+    /// <summary>
+    /// Populates and bulk-inserts event data from the PQDIF file.
+    /// </summary>
+    /// <param name="pqdifFile">The PQDIF file containing event data.</param>
     public async Task BulkInsertEventsAsync(PqdifFile pqdifFile)
     {
         var dataBuilder = new EventTableBuilder();
@@ -40,6 +57,10 @@ public class Inserts
         await _MeasurementRepository.BulkInsertAsync(table.TableName, table);
     }
 
+    /// <summary>
+    /// Populates and bulk-inserts base measurement data from the PQDIF file.
+    /// </summary>
+    /// <param name="pqdifFile">The PQDIF file containing base measurement data.</param>
     public async Task BulkInsertBaseAsync(PqdifFile pqdifFile)
     {
         var table = CreateBaseDataTable(pqdifFile.Channels);
@@ -49,6 +70,10 @@ public class Inserts
         await _MeasurementRepository.BulkInsertAsync("base", table);
     }
 
+    /// <summary>
+    /// Creates DataTables for voltage/current harmonics and interharmonics.
+    /// </summary>
+    /// <returns>Tuple of DataTables for voltage harmonics, voltage interharmonics, current harmonics, and current interharmonics.</returns>
     private (DataTable VoltageHarmonics, DataTable VoltageInterharmonics, 
              DataTable CurrentHarmonics, DataTable CurrentInterharmonics) CreateHarmonicsTables()
     {
@@ -60,6 +85,11 @@ public class Inserts
         );
     }
 
+    /// <summary>
+    /// Creates a DataTable for base measurement data, with columns for each channel/series.
+    /// </summary>
+    /// <param name="channels">Array of channels to analyze for columns.</param>
+    /// <returns>A DataTable with appropriate columns for base data.</returns>
     private DataTable CreateBaseDataTable(Channel[] channels)
     {
         var table = new DataTable();
@@ -106,6 +136,14 @@ public class Inserts
         await _MeasurementRepository.BulkInsertAsync("Frequency60ColumnstoreInt", table);
     }
 
+    /// <summary>
+    /// Populates and bulk-inserts 60 Hz frequency measurement data.
+    /// </summary>
+    /// <param name="pqdifFile">The PQDIF file containing frequency data.</param>
+    /// <summary>
+    /// Populates and bulk-inserts 720 Hz frequency measurement data.
+    /// </summary>
+    /// <param name="pqdifFile">The PQDIF file containing frequency data.</param>
     public async Task BulkInsertFreq720(PqdifFile pqdifFile)
     {
         var table = CreateFrequencyTable(MeasurementConstants.FrequencySampleSize720, typeof(int));
@@ -113,6 +151,12 @@ public class Inserts
         await _MeasurementRepository.BulkInsertAsync("Frequency720Int", table);
     }
 
+    /// <summary>
+    /// Creates a DataTable for frequency measurement data with the specified sample size and data type.
+    /// </summary>
+    /// <param name="sampleSize">Number of frequency samples per row.</param>
+    /// <param name="dataType">Type of the frequency columns (e.g., int or double).</param>
+    /// <returns>A DataTable with columns for frequency data.</returns>
     private DataTable CreateFrequencyTable(int sampleSize, Type dataType)
     {
         var table = new DataTable();
@@ -132,6 +176,14 @@ public class Inserts
 
 
 
+    /// <summary>
+    /// Populates a frequency DataTable with values from the PQDIF file, calculating min, max, and average.
+    /// </summary>
+    /// <param name="table">The DataTable to populate.</param>
+    /// <param name="pqdifFile">The PQDIF file containing frequency data.</param>
+    /// <param name="sampleSize">Number of frequency samples per row.</param>
+    /// <param name="asInteger">Whether to store values as integers.</param>
+    /// <param name="yearOffset">Offset to apply to the start time (for test data separation).</param>
     private void PopulateFrequencyTable(DataTable table, PqdifFile pqdifFile, 
         int sampleSize, bool asInteger, int yearOffset)
     {

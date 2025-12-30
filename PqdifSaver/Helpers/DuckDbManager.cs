@@ -2,6 +2,10 @@ using DuckDB.NET.Data;
 
 public static class DuckDbManager
 {
+    /// <summary>
+    /// Creates all required DuckDB tables if they do not already exist.
+    /// </summary>
+
     public static void CreateTables()
     {
         string dbPath = ConfigBuilder.Instance.DuckDBConnectionString;

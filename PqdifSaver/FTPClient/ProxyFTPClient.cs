@@ -1,5 +1,9 @@
 using FluentFTP;
 
+/// <summary>
+/// Handles downloading PQDIF files from an FTP server, supporting edge cases for modification time and folder structure.
+/// Uses FluentFTP for asynchronous FTP operations.
+/// </summary>
 public class ProxyFTPClient
 {
     private string _ftpHost = "127.0.0.1";          // FileZilla Server
@@ -8,6 +12,12 @@ public class ProxyFTPClient
     private string _basePath = "/";            // FileZilla virtual mount root
     string localPath = @"C:\Temp\";     // Where files will be saved
 
+    /// <summary>
+    /// Downloads PQDIF files from the FTP server, handling edge cases for the first day and modification times.
+    /// </summary>
+    /// <param name="afterDate">Start date for file retrieval.</param>
+    /// <param name="localDownloadPath">Local directory to save downloaded files.</param>
+    /// <returns>List of downloaded file paths.</returns>
     public async Task<List<string>> DownloadPqdFilesWithEdgeCaseAsync(DateTime afterDate, string localDownloadPath)
     {
         var downloadedFiles = new List<string>();
@@ -66,6 +76,14 @@ public class ProxyFTPClient
         return downloadedFiles;
     }
 
+    /// <summary>
+    /// Downloads only PQDIF files modified after a specific date for a given day.
+    /// </summary>
+    /// <param name="client">The connected FTP client.</param>
+    /// <param name="date">The day to check for modified files.</param>
+    /// <param name="afterDateTime">The cutoff datetime for modification.</param>
+    /// <param name="localDownloadPath">Local directory to save files.</param>
+    /// <returns>List of downloaded file paths.</returns>
     private async Task<List<string>> DownloadModifiedPqdifFoldersForDate(AsyncFtpClient client, 
         DateTime date, DateTime afterDateTime, string localDownloadPath)
     {

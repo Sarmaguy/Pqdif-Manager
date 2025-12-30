@@ -7,12 +7,21 @@ using System.Collections.Generic;
 
 
 
+/// <summary>
+/// Provides static methods for inspecting and dumping the contents of PQDIF physical and logical records.
+/// Includes utilities for traversing collections, printing element details, and searching for specific values.
+/// </summary>
 public static class PqdifInspector
 {
     // epsilon for numeric match
     private const double EPS = 1e-6;
     private const double TARGET = 0.07;
 
+    /// <summary>
+    /// Dumps the structure and contents of a PQDIF physical record to the console, including all nested elements.
+    /// Also searches for REAL8 values approximately equal to TARGET.
+    /// </summary>
+    /// <param name="physicalRecord">The physical record to inspect.</param>
     public static void DumpRecord(Record physicalRecord)
     {
         Console.WriteLine($"=== RECORD DUMP ===");
@@ -33,6 +42,12 @@ public static class PqdifInspector
         Console.WriteLine("=== END SEARCH ===");
     }
 
+    /// <summary>
+    /// Recursively dumps the contents of a collection element, printing details for each child element.
+    /// </summary>
+    /// <param name="collection">The collection element to dump.</param>
+    /// <param name="path">The logical path to the collection.</param>
+    /// <param name="indent">Indentation level for pretty printing.</param>
     private static void DumpCollection(CollectionElement collection, string path, int indent)
     {
         if (collection is null)
@@ -106,6 +121,11 @@ public static class PqdifInspector
         }
     }
 
+    /// <summary>
+    /// Prints statistics (min, max, avg) for numeric vector elements.
+    /// </summary>
+    /// <param name="vector">The vector element to analyze.</param>
+    /// <param name="indentStr">Indentation string for pretty printing.</param>
     private static void DumpVectorStatistics(VectorElement vector, string indentStr)
     {
         try
@@ -171,6 +191,11 @@ public static class PqdifInspector
         }
     }
 
+    /// <summary>
+    /// Converts a scalar element to a string representation based on its physical type.
+    /// </summary>
+    /// <param name="scalar">The scalar element to convert.</param>
+    /// <returns>String representation of the scalar value.</returns>
     private static string ScalarValueToString(ScalarElement scalar)
     {
         switch (scalar.TypeOfValue)
@@ -203,6 +228,11 @@ public static class PqdifInspector
         }
     }
 
+    /// <summary>
+    /// Converts a vector element to a string representation, printing a subset of values for large vectors.
+    /// </summary>
+    /// <param name="vector">The vector element to convert.</param>
+    /// <returns>String representation of the vector values.</returns>
     private static string VectorValueToString(VectorElement vector)
     {
         // Handle text specially
@@ -276,6 +306,12 @@ public static class PqdifInspector
         return result;
     }
 
+    /// <summary>
+    /// Recursively searches for REAL8 values approximately equal to TARGET in a collection element.
+    /// Prints the path and value if found.
+    /// </summary>
+    /// <param name="collection">The collection element to search.</param>
+    /// <param name="path">The logical path to the collection.</param>
     private static void SearchForValueReal8(CollectionElement collection, string path)
     {
         foreach (Element element in collection.Elements)
@@ -318,6 +354,11 @@ public static class PqdifInspector
         }
     }
 
+    /// <summary>
+    /// Returns a short string representation of a GUID tag (last 8 characters).
+    /// </summary>
+    /// <param name="tag">The GUID tag.</param>
+    /// <returns>Short string representation.</returns>
     private static string ElementTagShort(Guid tag)
     {
         // short form so paths aren't unreadable; returns last 8 chars of GUID
@@ -325,6 +366,11 @@ public static class PqdifInspector
         return s.Length >= 8 ? s.Substring(s.Length - 8) : s;
     }
     
+    /// <summary>
+    /// Returns a string with the full GUID and its short form.
+    /// </summary>
+    /// <param name="tag">The GUID tag.</param>
+    /// <returns>String with full and short tag info.</returns>
     private static string ElementTagInfo(Guid tag)
     {
         return $"Tag: {tag} (short: {ElementTagShort(tag)})";

@@ -6,20 +6,69 @@ using Gemstone.PQDIF.Logical;
 
 namespace PQDIF_Manager
 {
+    /// <summary>
+    /// Represents a parsed PQDIF file, including metadata, channels, and observation records.
+    /// Provides async loading and measurement extraction utilities.
+    /// </summary>
     public class PqdifFile
     {
+        /// <summary>
+        /// Gets the file path of the PQDIF file.
+        /// </summary>
         public string FilePath { get; private set; }
+        /// <summary>
+        /// Gets the file creation time.
+        /// </summary>
         public DateTime CreateTime { get; private set; }
+        /// <summary>
+        /// Gets the start time of the measurement.
+        /// </summary>
         public DateTime StartTime { get; private set; }
+        /// <summary>
+        /// Gets the effective time of the data source, if available.
+        /// </summary>
         public DateTime? EffectiveTime { get; private set; }
+        /// <summary>
+        /// Gets the name of the PQDIF file.
+        /// </summary>
         public string Name { get; private set; }
+        /// <summary>
+        /// Gets the device name associated with the file.
+        /// </summary>
         public string DeviceName { get; private set; }
+        /// <summary>
+        /// Gets the data source location.
+        /// </summary>
         public string DataSourceLocation { get; private set; }
+        /// <summary>
+        /// Gets the array of measurement channels in the file.
+        /// </summary>
         public Channel[] Channels { get; private set; }
+        /// <summary>
+        /// Gets the observation record for the file.
+        /// </summary>
         public ObservationRecord ObservationRecord { get; private set; }
+        /// <summary>
+        /// Gets the recording identifier for the file.
+        /// </summary>
         public string RecordingId {get; private set;}
+        /// <summary>
+        /// Gets the UTC start timestamp for the measurement.
+        /// </summary>
         public DateTime StartTimestampUtc => StartTime.ToUniversalTime();
 
+        /// <summary>
+        /// Initializes a new PqdifFile with all metadata and parsed channel/observation data.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="createTime">File creation time.</param>
+        /// <param name="startTime">Measurement start time.</param>
+        /// <param name="effectiveTime">Effective time of the data source.</param>
+        /// <param name="name">File name.</param>
+        /// <param name="deviceName">Device name.</param>
+        /// <param name="dataSourceLocation">Data source location.</param>
+        /// <param name="channels">Array of parsed channels.</param>
+        /// <param name="observationRecord">Observation record.</param>
         private PqdifFile(string filePath, DateTime createTime, DateTime startTime, DateTime effectiveTime,
         string name, string deviceName, string dataSourceLocation, Channel[] channels, ObservationRecord observationRecord)
         {
@@ -37,6 +86,11 @@ namespace PQDIF_Manager
 
         }
 
+        /// <summary>
+        /// Asynchronously loads and parses a PQDIF file from disk, extracting all channels and metadata.
+        /// </summary>
+        /// <param name="filePath">The path to the PQDIF file.</param>
+        /// <returns>A parsed PqdifFile instance.</returns>
         public static async Task<PqdifFile> LoadFromFileAsync(string filePath)
         {
 
@@ -71,6 +125,10 @@ namespace PQDIF_Manager
 
 
 
+        /// <summary>
+        /// Parses all measurements from the PQDIF file, returning a collection of Measurement objects.
+        /// </summary>
+        /// <returns>Enumerable of parsed Measurement objects.</returns>
         internal async Task<IEnumerable<Measurement>> ParseMeasurementsFromFile()
         {
             List<Measurement> measurements = new();

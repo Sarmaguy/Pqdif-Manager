@@ -4,16 +4,45 @@ using Gemstone.PQDIF.Logical;
 
 namespace PQDIF_Manager
 {
+    /// <summary>
+    /// Represents a measurement channel in a PQDIF file, including phase, name, series, and measured quantity.
+    /// Handles time/value series ordering and provides access to all series data.
+    /// </summary>
     public class Channel
     {
+        /// <summary>
+        /// Gets the underlying ChannelInstance from Gemstone PQDIF.
+        /// </summary>
         public ChannelInstance ChannelInstance { get; private set; }
+        /// <summary>
+        /// Gets or sets the phase for this channel.
+        /// </summary>
         public Phase Phase { get;  set; }
+        /// <summary>
+        /// Gets the channel name.
+        /// </summary>
         public string? ChannelName { get; private set; }
+        /// <summary>
+        /// Gets the number of series in this channel.
+        /// </summary>
         public int SeriesCount { get; private set; }
+        /// <summary>
+        /// Gets the measured quantity for this channel.
+        /// </summary>
         public QuantityMeasured QuantityMeasured { get; private set; }
+        /// <summary>
+        /// Gets the time series for this channel.
+        /// </summary>
         public Series TimeSeries { get; private set; }
+        /// <summary>
+        /// Gets the value series for this channel (all series except time).
+        /// </summary>
         public Series[] ValueSeries { get; private set; }
 
+        /// <summary>
+        /// Initializes a new Channel from a ChannelInstance, handling time/value series order.
+        /// </summary>
+        /// <param name="channelInstance">The underlying ChannelInstance.</param>
         public Channel(ChannelInstance channelInstance)
         {
             this.ChannelInstance = channelInstance;
@@ -37,6 +66,9 @@ namespace PQDIF_Manager
             }
         }
 
+        /// <summary>
+        /// Ensures the time series is first and value series are ordered correctly.
+        /// </summary>
         private void FixSeriesOrder()
         {
             //Find the time series
